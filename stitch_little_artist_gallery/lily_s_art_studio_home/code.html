@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lily's Art Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#266137",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#ede4ff",
+                    "on-surface-variant": "#514347",
+                    "on-background": "#1d1832",
+                    "surface-tint": "#864d61",
+                    "inverse-surface": "#322c48",
+                    "on-secondary-container": "#6d6329",
+                    "surface-bright": "#fdf7ff",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e7deff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#145129",
+                    "secondary-fixed-dim": "#d4c782",
+                    "outline-variant": "#d5c2c6",
+                    "inverse-primary": "#fab3ca",
+                    "tertiary-fixed-dim": "#96d5a0",
+                    "primary-fixed-dim": "#fab3ca",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#7b4458",
+                    "on-primary-fixed-variant": "#6a364a",
+                    "surface": "#fdf7ff",
+                    "surface-container": "#f2ebff",
+                    "outline": "#837377",
+                    "secondary": "#685f25",
+                    "secondary-container": "#eee199",
+                    "tertiary": "#2f6a3f",
+                    "on-surface": "#1d1832",
+                    "secondary-fixed": "#f1e39c",
+                    "surface-container-low": "#f8f1ff",
+                    "background": "#fdf7ff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#50470f",
+                    "surface-variant": "#e7deff",
+                    "primary-container": "#ffb7ce",
+                    "on-tertiary-fixed": "#00210b",
+                    "tertiary-fixed": "#b2f2bb",
+                    "on-secondary-fixed": "#201c00",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#360b1e",
+                    "tertiary-container": "#9bdaa5",
+                    "surface-dim": "#dfd5f9",
+                    "inverse-on-surface": "#f5eeff",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#ffd9e3",
+                    "primary": "#864d61"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "card-gap": "32px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "base-unit": "8px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Quicksand"],
+                    "label-md": ["Quicksand"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "body-md": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fdf7ff;
+            background-image: radial-gradient(#e7deff 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .paper-texture {
+            position: relative;
+        }
+        .paper-texture::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            pointer-events: none;
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+        }
+        .sticker-border {
+            box-shadow: 0 0 0 2px white, 0 10px 20px -5px rgba(134,77,97,0.2);
+        }
+        .tilt-left { transform: rotate(-2deg); }
+        .tilt-right { transform: rotate(2deg); }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background overflow-x-hidden">
+<!-- TopAppBar -->
+<nav class="sticky top-0 z-50 w-full rounded-b-xl shadow-xl shadow-[0_10px_20px_-5px_rgba(134,77,97,0.2)] bg-surface dark:bg-surface-container border-b-4 border-white transition-all duration-300">
+<div class="flex justify-between items-center px-5 md:px-margin-desktop py-4 w-full max-w-7xl mx-auto">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed italic select-none">
+                Lily's Art Studio
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-primary-fixed font-bold border-b-4 border-primary-container hover:scale-105 transition-transform duration-200" href="#">My Gallery</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:text-primary hover:scale-105 transition-transform duration-200" href="#">DIY Crafts</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:text-primary hover:scale-105 transition-transform duration-200" href="#">About Me</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="p-2 text-primary hover:scale-105 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+</button>
+<button class="p-2 text-primary hover:scale-105 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md hover:scale-105 active:rotate-2 transition-all shadow-lg">
+                    Hire Me!
+                </button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[819px] flex items-center justify-center py-20 px-5 md:px-margin-desktop overflow-hidden">
+<!-- Decorative "Art Supplies" Elements (Mocked with styled divs) -->
+<div class="absolute -top-10 -left-10 w-40 h-40 bg-primary-container/20 rounded-full blur-3xl"></div>
+<div class="absolute top-20 right-10 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl"></div>
+<div class="relative z-10 text-center max-w-4xl mx-auto">
+<div class="inline-block mb-6 bg-tertiary-container text-on-tertiary-container px-6 py-2 rounded-full font-label-md text-label-md sticker-border tilt-left">
+                    🎨 Artist at Work!
+                </div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-8 leading-tight">
+                    Welcome to My <span class="text-primary italic underline decoration-primary-container decoration-wavy">Creative World!</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
+                    Where every smudge is a story and every color is a superpower. Come explore my collection of handmade magic and crayon masterpieces!
+                </p>
+<div class="flex flex-wrap justify-center gap-6">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-headline-sm text-headline-sm sticker-border hover:translate-y-1 hover:shadow-sm transition-all duration-200">
+                        Explore Gallery
+                    </button>
+<button class="bg-white border-2 border-primary text-primary px-10 py-4 rounded-full font-headline-sm text-headline-sm hover:bg-primary-fixed transition-colors duration-200">
+                        Learn More
+                    </button>
+</div>
+</div>
+<!-- Sticker Accents -->
+<div class="absolute bottom-10 left-10 md:left-20 tilt-right hidden lg:block">
+<div class="w-32 h-32 rounded-2xl bg-white p-2 sticker-border paper-texture">
+<img class="w-full h-full object-cover rounded-xl" data-alt="A high-quality sticker-style illustration of a cute, colorful paintbrush with googly eyes on a clean lavender background. The art style is playful and handmade, with thick outlines and vibrant primary colors, fitting a child's creative portfolio aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4L7IQeUuYPKwM3_sV6-jVu00LnfUXNlvyUu5U14GW3uT_lh4uVIvFO92A7MbBWDXjcYS2AWJMNZeJwMjXtZ4fjeaoMAGhvg0ARv0tZrDKaxU0oc38ih0FedGjm4huHf3ROH4lO7VeqE03oDNYsTTdyj-lua-oyfmqWJgksvcUOUpQ75mgdbteLn57bFCVkMGjJ6BbxpyLlpK8eTMWH8uzKc5k_rFaxSCg-qIWD9TdIpY_eSQHb3LcxQ"/>
+</div>
+</div>
+<div class="absolute top-40 right-10 md:right-20 tilt-left hidden lg:block">
+<div class="w-24 h-24 rounded-full bg-secondary-container p-1 sticker-border flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-on-secondary-container" data-icon="auto_fix_high">auto_fix_high</span>
+</div>
+</div>
+</section>
+<!-- Featured Masterpieces -->
+<section class="py-20 px-5 md:px-margin-desktop bg-surface-container-low rounded-3xl mx-4 my-10">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-xl">
+<h2 class="font-headline-md text-headline-md text-on-background mb-4">Featured Masterpieces</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Selected works from my latest sketchbook adventures. Each piece is made with 100% imagination and lots of love!</p>
+</div>
+<a class="text-primary font-bold flex items-center gap-2 group" href="#">
+                        See All 42 Works
+                        <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-card-gap">
+<!-- Art Card 1 -->
+<div class="group relative bg-white p-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 tilt-left paper-texture border-4 border-white">
+<div class="aspect-square rounded-xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A vibrant, whimsical watercolor painting of a giant purple cat flying over a rainbow-colored city. The style is joyful and expressive, using soft textured brushstrokes on high-quality cold-pressed paper. The lighting is warm and golden, as if the sun is setting behind the rainbow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD45byO4zzQHRnmFkfMyZcTMjL5uRNmfuJ0-hnCkJz7Eo41EIZ1ncS5rdDFzSD9-tz6ltCz9s9jrdB_rwMYgH2SsldWowTf4bvkfZQSfF1fFqiTTqY7CSk5WfWdhTR-O2idIM0n0tG6Ux4WZIuSKxuM4Lqzvkoi2mQj0Y1DrxV-9x-lOHDHH00-p9HjlThgL-G2CwLoy_jZOZ1szFjHAF9XEHiLx5mX1vqltbZc1Ef-sIvV5TqKoa41A"/>
+</div>
+<div class="px-2">
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-md text-label-md mb-3 inline-block">Watercolor</span>
+<h3 class="font-headline-sm text-headline-sm text-on-background mb-2">The Rainbow Flight</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">A story about a cat who wanted to touch the sun.</p>
+</div>
+<div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary-fixed rounded-full flex items-center justify-center sticker-border rotate-12">
+<span class="material-symbols-outlined text-on-secondary-fixed" data-icon="grade" style="font-variation-settings: 'FILL' 1;">grade</span>
+</div>
+</div>
+<!-- Art Card 2 -->
+<div class="group relative bg-white p-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 tilt-right paper-texture border-4 border-white">
+<div class="aspect-square rounded-xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A creative mixed-media craft project featuring a dinosaur made of cardboard, buttons, and glittery pasta. The dinosaur is standing in a jungle made of green felt scraps. The overall look is tactile and handmade, captured with professional studio lighting that emphasizes the different textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrn3nKrZlNpa9GPVk83eYCJ_kB_RlN2D2FlXkjlazR_PzhP3q1xuf4mngT7h_FjW3BIlaDnXdvyBAtvFEg4de-_pjMgtY1gbc-xHqa1QqamDrPH6hSXSnAbUp-Fg-cDio9Fp9KiotNTkeesXZDac8Er0ifbrPxf1jvlj_GNH9VZpgkAY3tFeTdfek9_wpqAN1XmF0P0sxWQLZPQ1dIdg-Lr7ApX9_InLHPVzATP7Pl3xCOKijMfrnysA"/>
+</div>
+<div class="px-2">
+<span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-md text-label-md mb-3 inline-block">3D Craft</span>
+<h3 class="font-headline-sm text-headline-sm text-on-background mb-2">Pasta-saurus Rex</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">My school project about dinosaurs and bow-tie pasta.</p>
+</div>
+</div>
+<!-- Art Card 3 -->
+<div class="group relative bg-white p-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 tilt-left paper-texture border-4 border-white">
+<div class="aspect-square rounded-xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A detailed pencil and crayon sketch of a fantastical enchanted forest with glowing mushrooms and tiny fairies hidden in the tree hollows. The sketch is on slightly yellowed sketchbook paper with visible pencil lead smudges and vibrant pops of neon crayon colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDQDzp-EZL5fvzGEEFcHfVggyGehEKYidWhmHwZB9CWw2DUAxIagSOOeOaKFzp-CPnS83YeNpKvCrjHsalUfxcNdWjFgZ2-ZjTMs9oWbqAZuQ9DMNhUVTxrQTbeASij3UftbjBeLGcY56L33hCDZZ0d6uQOnS6bkpmT5lPqZXsV2KXX0Tzqtbwja7Tk6inmmVKUxkLMgdnXhn_sd1E2r81LFP8kCNrDbXS4xdtgI2S0LFtGcXcFvUMow"/>
+</div>
+<div class="px-2">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-label-md mb-3 inline-block">Sketchbook</span>
+<h3 class="font-headline-sm text-headline-sm text-on-background mb-2">The Hidden Forest</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Can you find all seven fairies hiding in the trees?</p>
+</div>
+<div class="absolute -bottom-4 -left-4 w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center sticker-border -rotate-12">
+<span class="material-symbols-outlined text-primary" data-icon="draw">draw</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 px-5 overflow-hidden">
+<div class="max-w-5xl mx-auto bg-primary text-on-primary rounded-[3rem] p-12 md:p-20 text-center relative shadow-2xl">
+<!-- Background pattern -->
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle, #fff 2px, transparent 2px); background-size: 20px 20px;"></div>
+<div class="relative z-10">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-6">Ready to see more magic?</h2>
+<p class="font-body-lg text-body-lg mb-10 opacity-90 max-w-2xl mx-auto">
+                        There are hundreds of drawings, paintings, and crafts waiting for you in my full gallery. Come and find your favorite!
+                    </p>
+<button class="bg-white text-primary px-12 py-5 rounded-full font-headline-sm text-headline-sm sticker-border hover:scale-105 active:scale-95 transition-all">
+                        Take Me to the Gallery!
+                    </button>
+</div>
+<!-- Abstract paint stroke decorations -->
+<div class="absolute top-10 left-10 w-24 h-4 bg-tertiary-container rounded-full rotate-45 opacity-50"></div>
+<div class="absolute bottom-20 right-10 w-32 h-6 bg-secondary-container rounded-full -rotate-12 opacity-50"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-16 rounded-t-[100px] md:rounded-t-full bg-secondary-container dark:bg-secondary border-t-8 border-white/30 shadow-[0_-10px_30px_rgba(104,95,37,0.15)] overflow-hidden">
+<div class="flex flex-col items-center gap-6 py-12 px-margin-desktop w-full max-w-7xl mx-auto">
+<div class="font-headline-sm text-headline-sm text-on-secondary-container">
+                Lily's Art Studio
+            </div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-label-md text-label-md text-on-secondary-container opacity-80 hover:opacity-100 hover:text-primary transition-all underline font-bold active:scale-95 duration-150" href="#">Let's create together!</a>
+<a class="font-label-md text-label-md text-on-secondary-container opacity-80 hover:opacity-100 hover:text-primary transition-all active:scale-95 duration-150" href="#">Privacy Policy</a>
+</div>
+<div class="flex gap-4 mb-4">
+<div class="w-10 h-10 rounded-full bg-on-secondary-container/10 flex items-center justify-center text-on-secondary-container hover:bg-on-secondary-container/20 transition-colors">
+<span class="material-symbols-outlined" data-icon="brush">brush</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-on-secondary-container/10 flex items-center justify-center text-on-secondary-container hover:bg-on-secondary-container/20 transition-colors">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-on-secondary-container/10 flex items-center justify-center text-on-secondary-container hover:bg-on-secondary-container/20 transition-colors">
+<span class="material-symbols-outlined" data-icon="face_6">face_6</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-secondary-container opacity-60">
+                2024 Handmade with Magic &amp; Crayons
+            </p>
+</div>
+</footer>
+<!-- Simple Scroll Interaction -->
+<script>
+        document.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
+    </script>
+</body></html>

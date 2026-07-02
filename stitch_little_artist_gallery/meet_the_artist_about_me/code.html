@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lily's Art Studio - About Me</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&amp;family=Be+Vietnam+Pro:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#266137",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#ede4ff",
+                    "on-surface-variant": "#514347",
+                    "on-background": "#1d1832",
+                    "surface-tint": "#864d61",
+                    "inverse-surface": "#322c48",
+                    "on-secondary-container": "#6d6329",
+                    "surface-bright": "#fdf7ff",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e7deff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#145129",
+                    "secondary-fixed-dim": "#d4c782",
+                    "outline-variant": "#d5c2c6",
+                    "inverse-primary": "#fab3ca",
+                    "tertiary-fixed-dim": "#96d5a0",
+                    "primary-fixed-dim": "#fab3ca",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#7b4458",
+                    "on-primary-fixed-variant": "#6a364a",
+                    "surface": "#fdf7ff",
+                    "surface-container": "#f2ebff",
+                    "outline": "#837377",
+                    "secondary": "#685f25",
+                    "secondary-container": "#eee199",
+                    "tertiary": "#2f6a3f",
+                    "on-surface": "#1d1832",
+                    "secondary-fixed": "#f1e39c",
+                    "surface-container-low": "#f8f1ff",
+                    "background": "#fdf7ff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#50470f",
+                    "surface-variant": "#e7deff",
+                    "primary-container": "#ffb7ce",
+                    "on-tertiary-fixed": "#00210b",
+                    "tertiary-fixed": "#b2f2bb",
+                    "on-secondary-fixed": "#201c00",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#360b1e",
+                    "tertiary-container": "#9bdaa5",
+                    "surface-dim": "#dfd5f9",
+                    "inverse-on-surface": "#f5eeff",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#ffd9e3",
+                    "primary": "#864d61"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "card-gap": "32px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "base-unit": "8px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Quicksand"],
+                    "label-md": ["Quicksand"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "body-md": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .paper-texture {
+            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+            opacity: 0.05;
+        }
+        .sticker-border {
+            box-shadow: 0 0 0 4px white, 0 10px 20px rgba(134, 77, 97, 0.15);
+        }
+        .hand-drawn-border {
+            border: 4px solid white;
+            box-shadow: 8px 8px 0px rgba(134, 77, 97, 0.1);
+        }
+        .paint-stroke {
+            height: 12px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #ffb7ce 0%, #eee199 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .paint-stroke::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+            animation: stroke-shine 3s infinite linear;
+        }
+        @keyframes stroke-shine {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+        .scribble-underline {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 Q 25 0 50 5 Q 75 10 100 5' stroke='%23ffb7ce' stroke-width='4' fill='none'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-position: bottom;
+            padding-bottom: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="w-full rounded-b-xl shadow-xl shadow-[0_10px_20px_-5px_rgba(134,77,97,0.2)] bg-surface sticky top-0 z-50 border-b-4 border-white">
+<div class="flex justify-between items-center px-margin-desktop py-4 w-full max-w-7xl mx-auto">
+<div class="font-headline-md text-headline-md text-primary italic">Lily's Art Studio</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant hover:text-primary hover:scale-105 transition-transform duration-200 font-label-md text-label-md" href="#">My Gallery</a>
+<a class="text-on-surface-variant hover:text-primary hover:scale-105 transition-transform duration-200 font-label-md text-label-md" href="#">DIY Crafts</a>
+<a class="text-primary font-bold border-b-4 border-primary-container hover:scale-105 transition-transform duration-200 font-label-md text-label-md" href="#">About Me</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-primary hover:scale-110 cursor-pointer">palette</span>
+<span class="material-symbols-outlined text-primary hover:scale-110 cursor-pointer">favorite</span>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md hover:scale-105 transition-transform duration-200">Hire Me!</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-12 relative">
+<!-- Floating Decor -->
+<div class="absolute -top-4 -left-12 rotate-[-15deg] opacity-20 pointer-events-none hidden lg:block">
+<span class="material-symbols-outlined text-[120px] text-primary">brush</span>
+</div>
+<div class="absolute top-1/2 -right-8 rotate-[10deg] opacity-20 pointer-events-none hidden lg:block">
+<span class="material-symbols-outlined text-[100px] text-secondary">extension</span>
+</div>
+<!-- Hero Section: The Artist -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
+<div class="lg:col-span-5 relative group">
+<div class="absolute inset-0 bg-primary-container rounded-3xl rotate-[-3deg] group-hover:rotate-[-5deg] transition-transform duration-300"></div>
+<div class="relative bg-white p-4 rounded-3xl hand-drawn-border rotate-[2deg] group-hover:rotate-0 transition-transform duration-300 overflow-hidden">
+<div class="paper-texture absolute inset-0 z-10 pointer-events-none"></div>
+<img class="w-full aspect-square object-cover rounded-2xl" data-alt="A whimsical portrait of a young girl artist with messy pigtails, holding a giant paintbrush. She is wearing a colorful apron covered in paint splatters. The lighting is soft and warm, in a bright sunlit studio with a cheerful, creative atmosphere. The style is soft digital painting with hand-drawn aesthetic elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXyGjAwceLvYPgcUzl7TW8olxfukcRAFbEVKQW8LcDvFoqZN-9GLZVPi8gBeQi3LaSG07Y8GOCAQ6sy03RFN8vCRwEHEN2hQlwn28_eeBqR8GZ6nH_7fTaB8N-yNvqkeHyl3w3W2Nb99Uc5INTeNvVk8ZXlNhrQxctdWUhlKfydGQv6rRgb3VP7B7KI2q1M1FrhwL5LNCZh-XWQqpItXjXiwVtB4tiM-jkwECXsMEL6Dg_beCfGtmUSg"/>
+</div>
+<!-- Sticker Decor -->
+<div class="absolute -bottom-6 -right-6 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full sticker-border rotate-12 font-headline-sm text-headline-sm">
+                    Artist at Work! 🎨
+                </div>
+</div>
+<div class="lg:col-span-7 space-y-6">
+<h1 class="font-headline-lg text-headline-lg text-primary">Hi! I'm <span class="scribble-underline">Lily</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    I believe that every piece of paper is a playground waiting for a splash of color! My studio is a magical place where unicorns exist and every mess is actually a "happy accident." When I'm not painting, I'm usually hunting for the perfect sparkly seashell or practicing my magic wand wiggles!
+                </p>
+<div class="flex flex-wrap gap-4">
+<div class="bg-surface-container-high px-4 py-2 rounded-full border-2 border-dashed border-primary text-primary font-label-md text-label-md">
+                        Age: 7 &amp; 3/4
+                    </div>
+<div class="bg-tertiary-container px-4 py-2 rounded-full border-2 border-dashed border-on-tertiary-container text-on-tertiary-container font-label-md text-label-md">
+                        Profession: Professional Scribbler
+                    </div>
+</div>
+</div>
+</div>
+<!-- Bento Grid: Personality Details -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-card-gap">
+<!-- Best Art Supplies (Vertical Card) -->
+<div class="bg-surface-container p-8 rounded-[40px] hand-drawn-border rotate-[-1deg] relative overflow-hidden group">
+<div class="paper-texture absolute inset-0"></div>
+<h2 class="font-headline-sm text-headline-sm text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">auto_fix_high</span> Best Supplies
+                </h2>
+<ul class="space-y-6 relative z-10">
+<li class="space-y-2">
+<div class="flex justify-between font-label-md text-label-md text-on-surface">
+<span>Scented Markers</span>
+<span>Level: Max!</span>
+</div>
+<div class="paint-stroke w-full"></div>
+</li>
+<li class="space-y-2">
+<div class="flex justify-between font-label-md text-label-md text-on-surface">
+<span>Glitter Glue</span>
+<span>Level: Messy</span>
+</div>
+<div class="paint-stroke w-3/4"></div>
+</li>
+<li class="space-y-2">
+<div class="flex justify-between font-label-md text-label-md text-on-surface">
+<span>Finger Paints</span>
+<span>Level: Pro</span>
+</div>
+<div class="paint-stroke w-full"></div>
+</li>
+<li class="space-y-2">
+<div class="flex justify-between font-label-md text-label-md text-on-surface">
+<span>Googly Eyes</span>
+<span>Level: Fun</span>
+</div>
+<div class="paint-stroke w-1/2"></div>
+</li>
+</ul>
+</div>
+<!-- Things I Love to Make (Center Feature) -->
+<div class="bg-white p-8 rounded-[40px] hand-drawn-border rotate-[1.5deg] md:scale-105 shadow-xl relative overflow-hidden">
+<div class="paper-texture absolute inset-0"></div>
+<h2 class="font-headline-sm text-headline-sm text-secondary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">celebration</span> Creative Loves
+                </h2>
+<div class="grid grid-cols-1 gap-4 relative z-10">
+<div class="bg-secondary-container/30 p-4 rounded-2xl flex items-center gap-4 hover:bg-secondary-container transition-colors duration-200">
+<span class="material-symbols-outlined text-secondary text-3xl">castle</span>
+<span class="font-body-md text-body-md">Cardboard Castles</span>
+</div>
+<div class="bg-primary-container/30 p-4 rounded-2xl flex items-center gap-4 hover:bg-primary-container transition-colors duration-200">
+<span class="material-symbols-outlined text-primary text-3xl">pets</span>
+<span class="font-body-md text-body-md">Pet Portraits</span>
+</div>
+<div class="bg-tertiary-container/30 p-4 rounded-2xl flex items-center gap-4 hover:bg-tertiary-container transition-colors duration-200">
+<span class="material-symbols-outlined text-tertiary text-3xl">eco</span>
+<span class="font-body-md text-body-md">Pressed Flower Art</span>
+</div>
+<div class="bg-secondary-fixed/30 p-4 rounded-2xl flex items-center gap-4 hover:bg-secondary-fixed transition-colors duration-200">
+<span class="material-symbols-outlined text-secondary text-3xl">rocket_launch</span>
+<span class="font-body-md text-body-md">Spaceship Models</span>
+</div>
+</div>
+</div>
+<!-- My Favorite Colors (Vertical Card) -->
+<div class="bg-surface-container-high p-8 rounded-[40px] hand-drawn-border rotate-[-1.5deg] relative overflow-hidden">
+<div class="paper-texture absolute inset-0"></div>
+<h2 class="font-headline-sm text-headline-sm text-on-primary-container mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">palette</span> Favorite Palette
+                </h2>
+<div class="flex flex-col gap-4 relative z-10">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-[#ffb7ce] border-4 border-white shadow-md"></div>
+<span class="font-label-md text-label-md">Bubblegum Pink</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-[#eee199] border-4 border-white shadow-md"></div>
+<span class="font-label-md text-label-md">Sunny Yellow</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-[#9bdaa5] border-4 border-white shadow-md"></div>
+<span class="font-label-md text-label-md">Magic Meadow</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-[#f2ebff] border-4 border-white shadow-md"></div>
+<span class="font-label-md text-label-md">Cloud Lavender</span>
+</div>
+</div>
+<!-- Mini Sticker -->
+<div class="absolute -bottom-4 -left-2 rotate-[-15deg]">
+<span class="material-symbols-outlined text-6xl text-primary opacity-30">brush</span>
+</div>
+</div>
+</div>
+<!-- Inspirational Quote Block -->
+<div class="mt-24 text-center max-w-2xl mx-auto px-6 py-12 rounded-[50px] border-4 border-primary/20 border-dashed relative">
+<span class="material-symbols-outlined absolute -top-8 left-1/2 -translate-x-1/2 text-6xl text-primary bg-background px-4">format_quote</span>
+<p class="font-headline-md text-headline-md italic text-primary-container">"Every child is an artist. The problem is how to remain an artist once we grow up."</p>
+<p class="font-label-md text-label-md mt-4 text-on-surface-variant">— Pablo Picasso (My Favorite Art Hero!)</p>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-16 rounded-t-full bg-secondary-container dark:bg-secondary shadow-[0_-10px_30px_rgba(104,95,37,0.15)] border-t-8 border-white/30">
+<div class="flex flex-col items-center gap-4 py-12 px-margin-desktop w-full max-w-7xl mx-auto">
+<div class="font-headline-sm text-headline-sm text-on-secondary-container">Lily's Art Studio</div>
+<div class="flex gap-8">
+<a class="font-label-md text-label-md text-on-secondary-container opacity-80 hover:opacity-100 hover:text-primary transition-colors underline font-bold" href="#">Let's create together!</a>
+<a class="font-label-md text-label-md text-on-secondary-container opacity-80 hover:opacity-100 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<div class="font-body-md text-body-md text-on-secondary-container/70">
+                2024 Handmade with Magic &amp; Crayons
+            </div>
+</div>
+</footer>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('.hand-drawn-border').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = `rotate(${Math.random() * 4 - 2}deg) scale(1.02)`;
+                card.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                const initialRotate = card.classList.contains('rotate-[-1deg]') ? '-1deg' : 
+                                     card.classList.contains('rotate-[1.5deg]') ? '1.5deg' : 
+                                     card.classList.contains('rotate-[-1.5deg]') ? '-1.5deg' : '0deg';
+                card.style.transform = `rotate(${initialRotate}) scale(1)`;
+            });
+        });
+    </script>
+</body></html>

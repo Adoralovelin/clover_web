@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Magic Show Comic | Clover's Art Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="css/shared.css" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "on-tertiary-container": "#266137", "on-primary": "#ffffff", "surface-container-high": "#ede4ff",
+        "on-surface-variant": "#514347", "on-background": "#1d1832", "surface-tint": "#864d61",
+        "inverse-surface": "#322c48", "on-secondary-container": "#6d6329", "surface-bright": "#fdf7ff",
+        "error-container": "#ffdad6", "surface-container-highest": "#e7deff", "surface-container-lowest": "#ffffff",
+        "on-secondary": "#ffffff", "on-tertiary-fixed-variant": "#145129", "secondary-fixed-dim": "#d4c782",
+        "outline-variant": "#d5c2c6", "inverse-primary": "#fab3ca", "tertiary-fixed-dim": "#96d5a0",
+        "primary-fixed-dim": "#fab3ca", "on-tertiary": "#ffffff", "on-primary-container": "#7b4458",
+        "on-primary-fixed-variant": "#6a364a", "surface": "#fdf7ff", "surface-container": "#f2ebff",
+        "outline": "#837377", "secondary": "#685f25", "secondary-container": "#eee199", "tertiary": "#2f6a3f",
+        "on-surface": "#1d1832", "secondary-fixed": "#f1e39c", "surface-container-low": "#f8f1ff",
+        "background": "#fdf7ff", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#50470f",
+        "surface-variant": "#e7deff", "primary-container": "#ffb7ce", "on-tertiary-fixed": "#00210b",
+        "tertiary-fixed": "#b2f2bb", "on-secondary-fixed": "#201c00", "on-error": "#ffffff",
+        "on-primary-fixed": "#360b1e", "tertiary-container": "#9bdaa5", "surface-dim": "#dfd5f9",
+        "inverse-on-surface": "#f5eeff", "error": "#ba1a1a", "primary-fixed": "#ffd9e3", "primary": "#864d61"
+      },
+      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+      spacing: { "margin-mobile": "20px", "card-gap": "32px", "margin-desktop": "64px", gutter: "24px", "base-unit": "8px" },
+      fontFamily: {
+        "headline-sm": ["Quicksand"], "label-md": ["Quicksand"], "body-lg": ["Be Vietnam Pro"],
+        "headline-md": ["Quicksand"], "headline-lg-mobile": ["Quicksand"], "headline-lg": ["Quicksand"], "body-md": ["Be Vietnam Pro"]
+      },
+      fontSize: {
+        "headline-sm": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+        "label-md": ["14px", { lineHeight: "1.0", letterSpacing: "0.05em", fontWeight: "700" }],
+        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+        "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "600" }],
+        "headline-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+        "headline-lg": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }]
+      }
+    }
+  }
+}
+</script>
+<style>
+  .scene-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+    color: #864d61;
+    opacity: 0.45;
+    font-size: 1.25rem;
+  }
+  .scene-connector span { line-height: 1; }
+
+  /* Chaos on Stage animations */
+  @keyframes csBounce {
+    from { transform: translateY(0px); }
+    to   { transform: translateY(-6px); }
+  }
+  @keyframes csFX {
+    0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -200%) scale(1.5); }
+  }
+  @keyframes csPopIn {
+    0%   { opacity: 0; transform: translateX(-50%) scale(0.2); }
+    70%  { transform: translateX(-50%) scale(1.15); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1); }
+  }
+  @keyframes csSplat {
+    0%   { transform: translateX(-50%) scaleX(1)   scaleY(1);   opacity: 1; }
+    45%  { transform: translateX(-50%) scaleX(2.6) scaleY(0.25); opacity: 1; }
+    100% { transform: translateX(-50%) scaleX(1.8) scaleY(0);   opacity: 0; }
+  }
+  @keyframes csShake {
+    0%,100% { transform: translate(0,0) rotate(0deg); }
+    10%     { transform: translate(-6px, 4px) rotate(-1.5deg); }
+    20%     { transform: translate(6px,-4px) rotate(1.5deg); }
+    30%     { transform: translate(-8px, 6px) rotate(-2deg); }
+    40%     { transform: translate(8px,-6px) rotate(2deg); }
+    50%     { transform: translate(-6px, 4px) rotate(-1.5deg); }
+    60%     { transform: translate(6px,-4px) rotate(1.5deg); }
+    70%     { transform: translate(-8px, 6px) rotate(-2deg); }
+    80%     { transform: translate(8px,-6px) rotate(2deg); }
+    90%     { transform: translate(-4px, 2px) rotate(-1deg); }
+  }
+  @keyframes csChaosText {
+    0%   { opacity:0; transform:translate(-50%,-50%) scale(0.4) rotate(-8deg); }
+    30%  { opacity:1; transform:translate(-50%,-50%) scale(1.15) rotate(3deg); }
+    60%  { transform:translate(-50%,-50%) scale(0.95) rotate(-2deg); }
+    100% { opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
+  }
+</style>
+</head>
+<body class="font-body-md text-on-background pb-20 md:pb-0" data-page="gallery">
+<div class="page-content">
+
+<header data-nav class="w-full rounded-b-xl shadow-xl shadow-[0_10px_20px_-5px_rgba(134,77,97,0.2)] bg-surface border-b-4 border-white sticky top-0 z-[100] py-4">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop w-full max-w-7xl mx-auto">
+  <a href="index.html" data-page class="font-headline-md text-headline-md text-primary italic hover:scale-105 transition-transform">Clover's Art Studio</a>
+  <nav class="hidden md:flex items-center gap-8">
+    <a href="gallery.html" data-page data-nav-link="gallery" class="nav-link font-label-md text-label-md hover:scale-105 transition-all">My Gallery</a>
+    <a href="diy.html" data-page data-nav-link="diy" class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary hover:scale-105 transition-all">DIY Crafts</a>
+    <a href="about.html" data-page data-nav-link="about" class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary hover:scale-105 transition-all">About Me</a>
+  </nav>
+  <div class="flex items-center gap-4">
+    <a href="about.html" data-page class="hidden sm:flex items-center gap-2 px-6 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md shadow-lg hover:scale-105 transition-transform">
+      <span class="material-symbols-outlined">palette</span> Hire Me!
+    </a>
+  </div>
+</div>
+</header>
+
+<main class="max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop py-12">
+
+  <!-- Back link -->
+  <a href="gallery.html" data-page class="inline-flex items-center gap-2 text-primary font-label-md text-label-md mb-10 hover:gap-3 transition-all group">
+    <span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
+    Back to Gallery
+  </a>
+
+  <!-- Title -->
+  <div class="text-center mb-14" data-animate>
+    <div class="inline-block bg-secondary-container text-on-secondary-container px-5 py-2 rounded-full font-label-md text-label-md sticker-border tilt-left mb-4">🎪 A Magic Show Story</div>
+    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">The Magic Show Comic</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">Six scenes of chaos, magic, and a very opinionated fox. Scroll to read from start to finish!</p>
+  </div>
+
+  <!-- Scenes -->
+  <div class="flex flex-col gap-0">
+
+    <!-- Scene 1 -->
+    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-primary" data-animate>
+      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-primary/10">
+        <span class="bg-primary text-on-primary px-4 py-1 rounded-full font-label-md text-label-md">Scene 1</span>
+        <span class="font-headline-sm text-headline-sm text-primary">This Is My Moment!</span>
+      </div>
+      <img class="w-full h-auto block" alt="Scene 1: Singer steps on stage for her big moment" src="images/comic-scene-1.png"/>
+      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">♫ THIS IS MY MOMENT— ♫ …then SKREEEEEECH!</p>
+    </div>
+
+    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
+
+    <!-- Scene 2 -->
+    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-secondary" data-animate>
+      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-secondary/10">
+        <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-label-md text-label-md">Scene 2</span>
+        <span class="font-headline-sm text-headline-sm text-secondary">POOF!</span>
+      </div>
+      <img class="w-full h-auto block" alt="Scene 2: The magician makes the singer's solo disappear with a POOF!" src="images/comic-scene-2.png"/>
+      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">"BEHOLD! I SHALL MAKE SOMETHING DISAPPEAR!" — "You just made my solo disappear." — "Technically… magic."</p>
+    </div>
+
+    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
+
+    <!-- Scene 3 -->
+    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-tertiary" data-animate>
+      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-tertiary/10">
+        <span class="bg-tertiary text-on-tertiary px-4 py-1 rounded-full font-label-md text-label-md">Scene 3</span>
+        <span class="font-headline-sm text-headline-sm text-tertiary">The Fox Trick</span>
+      </div>
+      <img class="w-full h-auto block" alt="Scene 3: The magician pulls a fox out of his hat instead of a rabbit" src="images/comic-scene-3.png"/>
+      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">"PREPARE YOURSELVES FOR A CLASSIC RABBIT TRICK!" — "This is not the forest. And you are not a tree." — "Please pretend to be a rabbit." — "I charge extra."</p>
+    </div>
+
+    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
+
+    <!-- Scene 4 -->
+    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-primary-container" data-animate>
+      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-primary/10">
+        <span class="bg-primary-container text-on-primary-container px-4 py-1 rounded-full font-label-md text-label-md">Scene 4</span>
+        <span class="font-headline-sm text-headline-sm text-primary">Talent Show Chaos!</span>
+      </div>
+      <img class="w-full h-auto block" alt="Scene 4: The talent show erupts in chaos with a shocked audience" src="images/comic-scene-4.png"/>
+      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">"Excuse me, I was hitting a HIGH NOTE." — "I thought a car alarm joined the show." — "No problem! I will fix this with MORE MAGIC!"</p>
+    </div>
+
+    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
+
+    <!-- Scene 5 -->
+    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-secondary-container" data-animate>
+      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-secondary/10">
+        <span class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-md text-label-md">Scene 5</span>
+        <span class="font-headline-sm text-headline-sm text-secondary">The Squeaky Pencil</span>
+      </div>
+      <img class="w-full h-auto block" alt="Scene 5: The magician pulls a squeaky animated pencil from his hat" src="images/comic-scene-5.png"/>
+      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">"This time, definitely a rabbit." — SQUEAK — "Is it alive?" — "No." — "That's what it wants us to think." — SQUEEEEEAK!</p>
+    </div>
+
+    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
+
+    <!-- Scene 6 -->
+    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-tertiary-container relative" data-animate>
+      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-tertiary/10">
+        <span class="bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full font-label-md text-label-md">Scene 6</span>
+        <span class="font-headline-sm text-headline-sm text-tertiary">Buzz on Stage!</span>
+        <span class="ml-auto bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full font-label-md text-label-md text-xs tilt-right">THE END 🌟</span>
+      </div>
+      <img class="w-full h-auto block" alt="Scene 6: A bee flies onto the stage and discovers music" src="images/comic-scene-6.png"/>
+      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">BZZZZZZZZZZ — "It's a bee!" — "A flying lemon with anger issues!" — SQUEAK — "It has discovered music." 🐝🎵</p>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 🎮  THE SQUEAKY PENCIL MINI-GAME          -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="mt-16" data-animate>
+    <!-- Header -->
+    <div class="bg-white rounded-3xl shadow-xl overflow-hidden" style="border-left: 8px solid #685f25;">
+      <div class="flex flex-wrap items-center gap-3 px-6 pt-6 pb-4" style="border-bottom: 2px solid rgba(104,95,37,0.15); background: rgba(238,225,153,0.25);">
+        <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-label-md text-label-md">Mini Game</span>
+        <span class="font-headline-sm text-headline-sm text-secondary">The Squeaky Pencil ✏️</span>
+        <span class="font-body-md text-body-md text-on-surface-variant ml-auto hidden sm:inline">Trace the shape — if you can!</span>
+      </div>
+      <div class="px-6 pb-2 pt-4">
+        <p class="font-body-md text-body-md text-on-surface-variant">Pick a shape and drag to trace it. But the pencil has a mind of its own — random <strong>SQUEAKS</strong> will send your line flying! 😱</p>
+      </div>
+
+      <!-- Shape Picker -->
+      <div class="flex flex-wrap gap-3 justify-center px-6 py-4">
+        <button onclick="SQgame.selectShape('star')"   id="sq-btn-star"   class="sq-shape-btn px-5 py-2 rounded-full font-label-md text-label-md transition-all" style="background:#ffd9e3;color:#7b4458;">⭐ Star</button>
+        <button onclick="SQgame.selectShape('heart')"  id="sq-btn-heart"  class="sq-shape-btn px-5 py-2 rounded-full font-label-md text-label-md transition-all" style="background:#eee199;color:#6d6329;">❤️ Heart</button>
+        <button onclick="SQgame.selectShape('fox')" id="sq-btn-fox" class="sq-shape-btn px-5 py-2 rounded-full font-label-md text-label-md transition-all" style="background:#b2f2bb;color:#266137;">🦊 Fox Head</button>
+      </div>
+
+      <!-- Canvas wrapper -->
+      <div class="relative px-4 pb-2 mx-auto" style="max-width:520px;">
+        <canvas id="sq-canvas" width="500" height="380"
+          class="w-full rounded-2xl touch-none"
+          style="background:#fdf7ff; border: 3px dashed rgba(104,95,37,0.3); cursor: crosshair; display:block;">
+        </canvas>
+        <!-- SQUEAK popup -->
+        <div id="sq-squeak" class="pointer-events-none absolute font-headline-md text-headline-md select-none"
+          style="top:40%;left:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity 0.08s;color:#864d61;text-shadow:0 2px 8px rgba(134,77,97,0.4);">
+          SQUEAK! 😱
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap gap-3 justify-center px-6 py-4">
+        <button onclick="SQgame.finish()" class="px-7 py-3 rounded-full font-label-md text-label-md shadow-md hover:scale-105 active:scale-95 transition-all" style="background:#864d61;color:#fff;">Done! ✓</button>
+        <button onclick="SQgame.reset()" class="px-7 py-3 rounded-full font-label-md text-label-md hover:scale-105 transition-all" style="background:#f2ebff;color:#1d1832;">Try Again 🔄</button>
+        <button onclick="SQgame.toggleWobble()" id="sq-wobble-btn" class="px-7 py-3 rounded-full font-label-md text-label-md hover:scale-105 transition-all" style="background:#eee199;color:#6d6329;">😵 Wobble: ON</button>
+      </div>
+
+      <!-- Score area -->
+      <div id="sq-score" class="hidden mx-6 mb-6 p-5 rounded-2xl text-center" style="background:rgba(255,217,227,0.4);">
+        <div id="sq-score-num" class="font-headline-lg text-headline-lg-mobile text-primary mb-1"></div>
+        <div id="sq-score-msg" class="font-body-lg text-body-lg text-on-surface-variant"></div>
+        <div id="sq-score-bar-wrap" class="mt-4 h-4 rounded-full overflow-hidden" style="background:rgba(134,77,97,0.15);">
+          <div id="sq-score-bar" class="h-full rounded-full transition-all duration-1000" style="width:0%;background:#864d61;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- end squeaky pencil game -->
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 🎪  CHAOS ON STAGE MINI-GAME              -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="mt-12" data-animate>
+    <div class="bg-white rounded-3xl shadow-xl overflow-hidden" style="border-left:8px solid #864d61;">
+
+      <!-- Header -->
+      <div class="flex flex-wrap items-center gap-3 px-6 pt-6 pb-4" style="border-bottom:2px solid rgba(134,77,97,0.15);background:rgba(255,185,206,0.18);">
+        <span class="bg-primary text-on-primary px-4 py-1 rounded-full font-label-md text-label-md">Mini Game 2</span>
+        <span class="font-headline-sm text-headline-sm text-primary">Chaos on Stage 🎪</span>
+        <span class="px-3 py-1 rounded-full font-label-md text-label-md ml-1" style="background:#ffd9e3;color:#864d61;">🌸 Clover Mode</span>
+      </div>
+      <div class="px-6 pb-3 pt-4">
+        <p class="font-body-md text-body-md text-on-surface-variant">Characters fall from the sky — <strong>click them</strong> before they hit the stage floor! Can you keep the show going for the whole 60 seconds? 🌟</p>
+      </div>
+
+      <!-- Stage area -->
+      <div class="px-4 pb-4 mx-auto" style="max-width:520px;">
+        <div id="cs-stage" class="relative rounded-2xl overflow-hidden select-none"
+          style="height:430px;background:linear-gradient(180deg,#110840 0%,#1c0e5e 55%,#5c3d1a 78%,#3d2409 100%);cursor:crosshair;">
+
+          <!-- Curtains -->
+          <div style="position:absolute;top:0;left:0;width:55px;height:100%;z-index:5;background:linear-gradient(90deg,#6b0000 60%,transparent);border-bottom-right-radius:55%;"></div>
+          <div style="position:absolute;top:0;right:0;width:55px;height:100%;z-index:5;background:linear-gradient(-90deg,#6b0000 60%,transparent);border-bottom-left-radius:55%;"></div>
+          <div style="position:absolute;top:0;left:50px;width:6px;height:100%;z-index:6;background:linear-gradient(180deg,#d4a017,#a07010);opacity:.55;"></div>
+          <div style="position:absolute;top:0;right:50px;width:6px;height:100%;z-index:6;background:linear-gradient(180deg,#d4a017,#a07010);opacity:.55;"></div>
+
+          <!-- Starfield -->
+          <div id="cs-stars" style="position:absolute;inset:0;height:78%;overflow:hidden;z-index:1;pointer-events:none;"></div>
+
+          <!-- STAGE FLOOR LINE — characters must not cross this! -->
+          <div id="cs-floor" style="position:absolute;left:0;right:0;z-index:7;pointer-events:none;"
+            style="bottom:22%;">
+            <div style="height:3px;background:linear-gradient(90deg,transparent 5%,rgba(255,210,60,0.85) 20%,rgba(255,210,60,0.85) 80%,transparent 95%);box-shadow:0 0 18px rgba(255,200,50,0.5);"></div>
+            <div style="text-align:center;margin-top:3px;font-family:Quicksand,sans-serif;font-size:10px;font-weight:700;color:rgba(255,210,60,0.6);letter-spacing:.12em;">— STAGE FLOOR —</div>
+          </div>
+
+          <!-- HUD -->
+          <div style="position:absolute;top:10px;left:62px;right:62px;z-index:12;display:flex;align-items:center;gap:6px;">
+            <!-- Score -->
+            <div style="background:rgba(0,0,0,.68);border-radius:20px;padding:4px 10px;color:white;font-family:Quicksand,sans-serif;font-size:12px;font-weight:700;flex-shrink:0;">⭐ <span id="cs-score-num">0</span></div>
+            <!-- Timer (centre) -->
+            <div style="background:rgba(0,0,0,.68);border-radius:20px;padding:4px 12px;font-family:Quicksand,sans-serif;font-size:14px;font-weight:700;flex-shrink:0;min-width:52px;text-align:center;">
+              <span id="cs-timer" style="color:#fde68a;">0:60</span>
+            </div>
+            <!-- Chaos bar -->
+            <div style="flex:1;background:rgba(0,0,0,.45);border-radius:10px;height:13px;overflow:hidden;border:1.5px solid rgba(255,80,80,.45);">
+              <div id="cs-chaos-fill" style="height:100%;width:0%;border-radius:8px;transition:width .28s,background .28s;"></div>
+            </div>
+            <div style="background:rgba(0,0,0,.68);border-radius:20px;padding:4px 8px;color:#fca5a5;font-family:Quicksand,sans-serif;font-size:10px;font-weight:700;flex-shrink:0;">🔥</div>
+          </div>
+
+          <!-- Falling characters container -->
+          <div id="cs-chars" style="position:absolute;inset:0;z-index:8;pointer-events:none;"></div>
+
+          <!-- Red flash overlay (miss feedback + chaos ending) -->
+          <div id="cs-flash" style="position:absolute;inset:0;z-index:15;background:#ef4444;opacity:0;pointer-events:none;transition:opacity .25s;border-radius:inherit;"></div>
+
+          <!-- TOTAL CHAOS text (appears at game over) -->
+          <div id="cs-chaos-text" style="display:none;position:absolute;top:42%;left:50%;z-index:18;pointer-events:none;text-align:center;animation:csChaosText .4s ease-out;">
+            <div style="font-family:Quicksand,sans-serif;font-size:2rem;font-weight:700;color:#fde68a;text-shadow:0 0 20px rgba(255,100,0,.9),0 3px 6px rgba(0,0,0,.8);white-space:nowrap;">🎪 TOTAL CHAOS! 🎪</div>
+            <div style="font-family:'Be Vietnam Pro',sans-serif;font-size:.85rem;color:rgba(255,255,255,.8);margin-top:6px;">The show has collapsed!</div>
+          </div>
+
+          <!-- Legend -->
+          <div style="position:absolute;bottom:3px;left:62px;right:62px;z-index:10;display:flex;justify-content:center;gap:10px;opacity:.5;">
+            <span style="color:#fbbf24;font-size:.7rem;font-family:Quicksand,sans-serif;font-weight:700;">🐝 Fast</span>
+            <span style="color:#fb923c;font-size:.7rem;font-family:Quicksand,sans-serif;font-weight:700;">🦊 Tricky</span>
+            <span style="color:#f472b6;font-size:.7rem;font-family:Quicksand,sans-serif;font-weight:700;">🎤 High Chaos</span>
+            <span style="color:#a78bfa;font-size:.7rem;font-family:Quicksand,sans-serif;font-weight:700;">✏️ Fastest</span>
+          </div>
+
+          <!-- Start / Game Over overlay -->
+          <div id="cs-overlay" style="position:absolute;inset:0;z-index:20;background:rgba(5,2,24,.82);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;">
+            <div style="font-size:3rem;">🎪</div>
+            <div id="cs-ov-title" style="color:#fff;font-family:Quicksand,sans-serif;font-size:1.6rem;font-weight:700;text-align:center;">Chaos on Stage!</div>
+            <div id="cs-ov-msg" style="color:rgba(255,255,255,.78);font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;text-align:center;max-width:280px;line-height:1.55;">
+              The bee, the fox, the singer, and the squeaky pencil fall from the sky.<br/><strong style="color:#fde68a;">Click them before they hit the stage floor!</strong>
+            </div>
+            <div id="cs-ov-score" style="display:none;color:#fde68a;font-family:Quicksand,sans-serif;font-size:2.2rem;font-weight:700;"></div>
+            <button id="cs-start-btn" onclick="CSgame.start()"
+              style="background:#864d61;color:#fff;border:none;padding:13px 36px;border-radius:999px;font-family:Quicksand,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 18px rgba(134,77,97,.55);margin-top:6px;transition:transform .15s;"
+              onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+              🎩 Start the Show!
+            </button>
+          </div>
+
+        </div>
+      </div><!-- /stage wrapper -->
+    </div>
+  </div><!-- end chaos game -->
+
+  <!-- Back to Gallery -->
+  <div class="mt-16 text-center" data-animate="scale">
+    <p class="font-body-md text-body-md text-on-surface-variant mb-6">Want to see the real crafts behind the comic?</p>
+    <a href="gallery.html" data-page class="inline-flex items-center gap-3 bg-primary text-on-primary px-10 py-4 rounded-full font-headline-sm text-headline-sm sticker-border hover:scale-105 active:scale-95 transition-all">
+      <span class="material-symbols-outlined">gallery_thumbnail</span>
+      Back to the Gallery
+    </a>
+  </div>
+
+</main>
+
+<footer class="w-full mt-16 rounded-t-full bg-secondary-container border-t-8 border-white/30 shadow-[0_-10px_30px_rgba(104,95,37,0.15)]">
+<div class="flex flex-col items-center gap-4 py-12 px-margin-mobile md:px-margin-desktop w-full max-w-4xl mx-auto">
+  <span class="font-headline-sm text-headline-sm text-on-secondary-container">Clover's Art Studio</span>
+  <div class="flex gap-8">
+    <a href="about.html" data-page class="font-label-md text-label-md text-on-secondary-container underline font-bold transition-colors hover:text-primary">Let's create together!</a>
+    <a href="#" class="font-label-md text-label-md text-on-secondary-container opacity-80 hover:opacity-100 transition-colors hover:text-primary">Privacy Policy</a>
+  </div>
+  <p class="font-label-md text-label-md text-on-secondary-container opacity-60 mt-4">2024 Handmade with Magic &amp; Crayons</p>
+</div>
+</footer>
+</div>
+
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-[0_-5px_20px_rgba(0,0,0,0.05)] flex justify-around items-center py-3 z-[200] rounded-t-2xl border-t-2 border-primary-container/20">
+  <a href="index.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">home</span><span class="font-label-md text-[10px]">Home</span></a>
+  <a href="gallery.html" data-page class="flex flex-col items-center gap-1 text-primary"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gallery_thumbnail</span><span class="font-label-md text-[10px]">Gallery</span></a>
+  <a href="diy.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">auto_fix</span><span class="font-label-md text-[10px]">DIY</span></a>
+  <a href="about.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">person</span><span class="font-label-md text-[10px]">About</span></a>
+</nav>
+
+<script src="js/main.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════
+   THE SQUEAKY PENCIL MINI-GAME
+══════════════════════════════════════════════════════ */
+const SQgame = (() => {
+  const canvas  = document.getElementById('sq-canvas');
+  const ctx     = canvas.getContext('2d');
+  const squeakEl = document.getElementById('sq-squeak');
+  const scoreEl  = document.getElementById('sq-score');
+  const scoreNum = document.getElementById('sq-score-num');
+  const scoreMsg = document.getElementById('sq-score-msg');
+  const scoreBar = document.getElementById('sq-score-bar');
+  const wobbleBtn = document.getElementById('sq-wobble-btn');
+
+  let shape       = 'star';
+  let drawing     = false;
+  let wobbleOn    = true;
+  let userPath    = [];   // clean mouse coords
+  let drawnPath   = [];   // wobbly actual coords
+  let squeakTimer = null;
+
+  // ── Shapes ──────────────────────────────────────────
+  function starPoints(cx, cy, R, r, n) {
+    const pts = [];
+    for (let i = 0; i < n * 2; i++) {
+      const rad = i % 2 === 0 ? R : r;
+      const ang = (i / (n * 2)) * Math.PI * 2 - Math.PI / 2;
+      pts.push({ x: cx + rad * Math.cos(ang), y: cy + rad * Math.sin(ang) });
+    }
+    return pts;
+  }
+
+  function heartPoints(cx, cy, scale) {
+    const pts = [];
+    for (let t = 0; t <= Math.PI * 2; t += 0.08) {
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+      pts.push({ x: cx + x * scale, y: cy + y * scale });
+    }
+    return pts;
+  }
+
+  function foxHeadPoints(cx, cy) {
+    // A fox head polygon: rounded face + two pointed ears on top
+    // All coords relative to canvas centre (cx, cy)
+    return [
+      { x: cx,       y: cy + 115 }, // chin
+      { x: cx - 75,  y: cy + 105 }, // left jaw
+      { x: cx - 108, y: cy + 60  }, // left cheek
+      { x: cx - 115, y: cy + 10  }, // left face
+      { x: cx - 110, y: cy - 35  }, // upper left face
+      { x: cx - 95,  y: cy - 65  }, // left ear base outer
+      { x: cx - 128, y: cy - 125 }, // left ear tip  ← pointy!
+      { x: cx - 60,  y: cy - 80  }, // left ear base inner
+      { x: cx - 30,  y: cy - 100 }, // top-left head
+      { x: cx,       y: cy - 107 }, // top centre
+      { x: cx + 30,  y: cy - 100 }, // top-right head
+      { x: cx + 60,  y: cy - 80  }, // right ear base inner
+      { x: cx + 128, y: cy - 125 }, // right ear tip ← pointy!
+      { x: cx + 95,  y: cy - 65  }, // right ear base outer
+      { x: cx + 110, y: cy - 35  }, // upper right face
+      { x: cx + 115, y: cy + 10  }, // right face
+      { x: cx + 108, y: cy + 60  }, // right cheek
+      { x: cx + 75,  y: cy + 105 }, // right jaw
+    ];
+  }
+
+  function getGuidePoints() {
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    if (shape === 'star')  return starPoints(cx, cy, 140, 60, 5);
+    if (shape === 'heart') return heartPoints(cx, cy + 10, 8.5);
+    if (shape === 'fox')   return foxHeadPoints(cx, cy - 10);
+    return [];
+  }
+
+  // Dense sample for scoring (300 pts along perimeter)
+  function getDenseSamplePoints() {
+    const guide = getGuidePoints();
+    if (guide.length < 2) return guide;
+    const target = 300;
+    const dense = [];
+    for (let i = 0; i < target; i++) {
+      const t = (i / target) * (guide.length - 1);
+      const a = Math.floor(t), b = Math.min(a + 1, guide.length - 1);
+      const f = t - a;
+      dense.push({
+        x: guide[a].x + (guide[b].x - guide[a].x) * f,
+        y: guide[a].y + (guide[b].y - guide[a].y) * f
+      });
+    }
+    return dense;
+  }
+
+  // ── Drawing helpers ──────────────────────────────────
+  function drawGuide() {
+    const pts = getGuidePoints();
+    if (!pts.length) return;
+    ctx.save();
+    ctx.setLineDash([10, 8]);
+    ctx.strokeStyle = 'rgba(134,77,97,0.22)';
+    ctx.lineWidth = 4;
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    pts.forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.closePath();
+    ctx.stroke();
+    ctx.setLineDash([]);
+    // Label
+    ctx.fillStyle = 'rgba(134,77,97,0.35)';
+    ctx.font = 'bold 13px Quicksand, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('✏️ Trace me!', canvas.width / 2, 24);
+    ctx.restore();
+  }
+
+  function redraw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawGuide();
+    if (drawnPath.length < 2) return;
+    ctx.save();
+    ctx.strokeStyle = '#864d61';
+    ctx.lineWidth = 3.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(drawnPath[0].x, drawnPath[0].y);
+    drawnPath.forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // ── Squeak effect ────────────────────────────────────
+  function triggerSqueak() {
+    squeakEl.style.opacity = '1';
+    // Random position on canvas
+    const pct = (v, max) => Math.round(20 + Math.random() * (max - 40));
+    squeakEl.style.top  = pct(0, canvas.height) + 'px';
+    squeakEl.style.left = pct(0, canvas.width)  + 'px';
+    clearTimeout(squeakTimer);
+    squeakTimer = setTimeout(() => { squeakEl.style.opacity = '0'; }, 500);
+  }
+
+  // ── Mouse / Touch helpers ────────────────────────────
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const sx = canvas.width  / rect.width;
+    const sy = canvas.height / rect.height;
+    const src = e.touches ? e.touches[0] : e;
+    return {
+      x: (src.clientX - rect.left) * sx,
+      y: (src.clientY - rect.top)  * sy
+    };
+  }
+
+  function wobble(pt) {
+    if (!wobbleOn) return pt;
+    const isSqueaky = Math.random() < 0.05;
+    const amp = isSqueaky ? 22 : 4; // normal jitter small; squeaks are big but survivable
+    if (isSqueaky) triggerSqueak();
+    return {
+      x: pt.x + (Math.random() - 0.5) * amp * 2,
+      y: pt.y + (Math.random() - 0.5) * amp * 2
+    };
+  }
+
+  function onStart(e) {
+    e.preventDefault();
+    scoreEl.classList.add('hidden');
+    drawing = true;
+    const pt = getPos(e);
+    userPath  = [pt];
+    drawnPath = [wobble(pt)];
+    redraw();
+  }
+
+  function onMove(e) {
+    e.preventDefault();
+    if (!drawing) return;
+    const pt = getPos(e);
+    userPath.push(pt);
+    drawnPath.push(wobble(pt));
+    redraw();
+  }
+
+  function onEnd(e) { drawing = false; }
+
+  // ── Scoring ──────────────────────────────────────────
+  function calcScore() {
+    if (drawnPath.length < 5) return 0;
+    const sample = getDenseSamplePoints(); // 300 guide points
+    const TOL = 16; // tight — must actually be on the line
+
+    // PRECISION: what % of your drawn strokes were close to the guide?
+    // Scribbling everywhere tanks this because most stray points are off-line.
+    let onLine = 0;
+    drawnPath.forEach(dp => {
+      if (sample.some(sp => Math.hypot(dp.x - sp.x, dp.y - sp.y) < TOL)) onLine++;
+    });
+    const precision = onLine / drawnPath.length; // 0–1
+
+    // COVERAGE: what % of the guide shape did you actually reach?
+    let covered = 0;
+    sample.forEach(sp => {
+      if (drawnPath.some(dp => Math.hypot(dp.x - sp.x, dp.y - sp.y) < TOL)) covered++;
+    });
+    const coverage = covered / sample.length; // 0–1
+
+    // Precision is weighted higher — staying ON the line matters most.
+    // A scribble gets high coverage but terrible precision → low score.
+    const raw = precision * 0.65 + coverage * 0.35;
+    return Math.round(raw * 100);
+  }
+
+  // ── Public API ────────────────────────────────────────
+  function selectShape(s) {
+    shape = s;
+    userPath = []; drawnPath = [];
+    scoreEl.classList.add('hidden');
+    // Highlight active button
+    ['star','heart','fox'].forEach(n => {
+      document.getElementById('sq-btn-' + n).style.outline = n === s ? '3px solid #864d61' : 'none';
+    });
+    redraw();
+  }
+
+  function finish() {
+    drawing = false;
+    const score = calcScore();
+    scoreEl.classList.remove('hidden');
+    scoreNum.textContent = score + ' / 100';
+    const msgs = score >= 90
+      ? ["PERFECT! Even the pencil is impressed! ⭐", "WOW! The squeaks didn't stand a chance! 🏆"]
+      : score >= 70
+      ? ["Pretty great! A little wobbly, but very charming! ✨", "The pencil only squeaked a little! Not bad at all! 🎉"]
+      : score >= 45
+      ? ["Wobbly but full of character! 🖍️", "The pencil had opinions. You persisted. Respect. ✏️"]
+      : ["The pencil completely took over 😅", "It has discovered chaos. 🎪 Try again!", "The bee is judging your lines. Try again! 🐝"];
+    scoreMsg.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+    setTimeout(() => { scoreBar.style.width = score + '%'; }, 80);
+  }
+
+  function reset() {
+    userPath = []; drawnPath = [];
+    scoreEl.classList.add('hidden');
+    scoreBar.style.width = '0%';
+    redraw();
+  }
+
+  function toggleWobble() {
+    wobbleOn = !wobbleOn;
+    wobbleBtn.textContent = wobbleOn ? '😵 Wobble: ON' : '😌 Wobble: OFF';
+  }
+
+  // ── Init ─────────────────────────────────────────────
+  canvas.addEventListener('mousedown',  onStart, { passive: false });
+  canvas.addEventListener('mousemove',  onMove,  { passive: false });
+  canvas.addEventListener('mouseup',    onEnd);
+  canvas.addEventListener('mouseleave', onEnd);
+  canvas.addEventListener('touchstart', onStart, { passive: false });
+  canvas.addEventListener('touchmove',  onMove,  { passive: false });
+  canvas.addEventListener('touchend',   onEnd,   { passive: false });
+
+  // First render
+  selectShape('star');
+
+  return { selectShape, finish, reset, toggleWobble };
+})();
+
+/* ════════════════════════════════════════════════════
+   CHAOS ON STAGE — FALLING OBJECTS GAME
+════════════════════════════════════════════════════ */
+const CSgame = (() => {
+  // DOM refs
+  const stage     = document.getElementById('cs-stage');
+  const charsCont = document.getElementById('cs-chars');
+  const overlay   = document.getElementById('cs-overlay');
+  const ovTitle   = document.getElementById('cs-ov-title');
+  const ovMsg     = document.getElementById('cs-ov-msg');
+  const ovScore   = document.getElementById('cs-ov-score');
+  const startBtn  = document.getElementById('cs-start-btn');
+  const scoreEl   = document.getElementById('cs-score-num');
+  const chaosBar  = document.getElementById('cs-chaos-fill');
+  const timerEl   = document.getElementById('cs-timer');
+  const flashEl   = document.getElementById('cs-flash');
+  const chaosText = document.getElementById('cs-chaos-text');
+  const floorDiv  = document.getElementById('cs-floor');
+
+  const GAME_SECS = 60; // countdown duration
+
+  // Starfield
+  const starsDiv = document.getElementById('cs-stars');
+  for (let i = 0; i < 48; i++) {
+    const s = document.createElement('div');
+    const sz = 1 + Math.random() * 2.8;
+    s.style.cssText = `position:absolute;width:${sz}px;height:${sz}px;background:rgba(255,255,255,${.2+Math.random()*.65});border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;`;
+    starsDiv.appendChild(s);
+  }
+
+  // 🌸 Clover Mode — tuned for an 8-year-old: slower falls, gentler chaos
+  const CHARS = [
+    { emoji: '🐝', name: 'Bee',    speed: 52,  chaos: 7,  pts: 15, color: '#fbbf24' },
+    { emoji: '🦊', name: 'Fox',    speed: 43,  chaos: 10, pts: 20, color: '#fb923c' },
+    { emoji: '🎤', name: 'Singer', speed: 35,  chaos: 14, pts: 25, color: '#f472b6' },
+    { emoji: '✏️', name: 'SQUEAK',speed: 65,  chaos: 6,  pts: 12, color: '#a78bfa' },
+  ];
+
+  let running = false, score = 0, chaos = 0, nextId = 0, elapsed = 0;
+  let fallers = [];
+  let rafId = null, spawnTid = null, tickTid = null, lastTs = null;
+  let endingTriggered = false;
+
+  function positionFloor() {
+    const h = stage.clientHeight || 430;
+    const y = h * 0.78;
+    floorDiv.style.top = y + 'px';
+    return y;
+  }
+
+  // 🌸 Clover Mode — gentle ramp, never overwhelming
+  function speedMult() {
+    if (elapsed < 12) return 1.0;
+    if (elapsed < 24) return 1.18;
+    if (elapsed < 36) return 1.38;
+    if (elapsed < 48) return 1.60;
+    return 1.85; // exciting finish, still doable!
+  }
+
+  // Clover Mode: max 3 at once, built up slowly
+  function waveSize() {
+    if (elapsed < 10) return 1;
+    if (elapsed < 22) return 2;
+    return 3; // top-out at 3 — manageable!
+  }
+
+  // Comfortable gaps between waves
+  function waveDelay() {
+    if (elapsed < 10) return 2800;
+    if (elapsed < 22) return 2200;
+    if (elapsed < 36) return 1700;
+    if (elapsed < 50) return 1350;
+    return 1050; // final 10s gets exciting
+  }
+
+  function timeLeft() { return Math.max(0, GAME_SECS - elapsed); }
+
+  function updateUI() {
+    scoreEl.textContent = score;
+    const tl = timeLeft();
+    const secs = tl % 60;
+    timerEl.textContent = '0:' + (secs < 10 ? '0' + secs : secs);
+    // Timer turns red in last 10 seconds
+    timerEl.style.color = tl <= 10 ? '#f87171' : tl <= 20 ? '#fb923c' : '#fde68a';
+    const pct = Math.min(100, chaos);
+    chaosBar.style.width = pct + '%';
+    chaosBar.style.background = chaos > 65
+      ? 'linear-gradient(90deg,#ef4444,#dc2626)'
+      : chaos > 35
+      ? 'linear-gradient(90deg,#f97316,#ef4444)'
+      : 'linear-gradient(90deg,#fbbf24,#f97316)';
+  }
+
+  // ── rAF game loop ────────────────────────────────────
+  function tick(ts) {
+    if (!running) return;
+    const dt = lastTs ? Math.min((ts - lastTs) / 1000, 0.06) : 0.016;
+    lastTs = ts;
+    const floorY = positionFloor();
+
+    fallers = fallers.filter(f => {
+      if (f.done) return false;
+      f.y += f.speed * speedMult() * dt;
+      f.el.style.top = f.y + 'px';
+      if (f.y >= floorY - 10) {
+        f.done = true;
+        onMiss(f);
+        return false;
+      }
+      return true;
+    });
+
+    rafId = requestAnimationFrame(tick);
+  }
+
+  // ── Spawn a whole wave at once ───────────────────────
+  function spawnWave() {
+    if (!running) return;
+    const count = waveSize();
+    // Spread x positions evenly with some randomness to avoid stacking
+    const slots = [];
+    for (let i = 0; i < count; i++) {
+      // Divide stage into count columns, pick random x within each
+      const colW = 68 / count;
+      const px = 15 + i * colW + Math.random() * colW;
+      slots.push(px);
+    }
+    // Shuffle so characters don't always come in the same order
+    slots.sort(() => Math.random() - 0.5);
+
+    slots.forEach((px, i) => {
+      // Stagger each character in the wave by up to 300ms
+      setTimeout(() => {
+        if (!running) return;
+        spawnOne(px);
+      }, i * (120 + Math.random() * 180));
+    });
+
+    spawnTid = setTimeout(spawnWave, waveDelay());
+  }
+
+  function spawnOne(px) {
+    const c = CHARS[Math.floor(Math.random() * CHARS.length)];
+    const id = nextId++;
+    const el = document.createElement('div');
+    el.style.cssText = `
+      position:absolute; left:${px}%; top:-65px;
+      transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:2px;
+      pointer-events:auto; cursor:pointer; user-select:none; z-index:9;
+      animation:csPopIn .18s ease-out;
+    `;
+    el.innerHTML = `
+      <div style="font-size:2.1rem;animation:csBounce .4s ease-in-out infinite alternate;filter:drop-shadow(0 4px 10px rgba(0,0,0,.8));">${c.emoji}</div>
+      <div style="background:rgba(0,0,0,.8);color:${c.color};font-family:Quicksand,sans-serif;font-size:9px;font-weight:700;padding:1px 6px;border-radius:6px;white-space:nowrap;">${c.name}</div>
+    `;
+    charsCont.appendChild(el);
+    const f = { id, el, y: -65, speed: c.speed, c, done: false };
+    fallers.push(f);
+    el.addEventListener('pointerdown', e => { e.stopPropagation(); onHit(f); });
+  }
+
+  // ── Hit ──────────────────────────────────────────────
+  function onHit(f) {
+    if (f.done) return;
+    f.done = true;
+    score += f.c.pts;
+    updateUI();
+    popFX(f.el, '✨ +' + f.c.pts, f.c.color);
+    f.el.style.transition = 'opacity .15s, transform .15s';
+    f.el.style.opacity = '0';
+    f.el.style.transform = 'translateX(-50%) scale(1.8)';
+    setTimeout(() => f.el.remove(), 170);
+  }
+
+  // ── Miss ─────────────────────────────────────────────
+  function onMiss(f) {
+    chaos = Math.min(100, chaos + f.c.chaos);
+    updateUI();
+    f.el.style.transformOrigin = 'center bottom';
+    f.el.style.animation = 'csSplat .36s ease-out forwards';
+    setTimeout(() => f.el.remove(), 380);
+    flashEl.style.opacity = '0.35';
+    setTimeout(() => { flashEl.style.opacity = '0'; }, 270);
+    if (chaos >= 100 && !endingTriggered) triggerChaosEnding();
+  }
+
+  // ── Timer second tick ────────────────────────────────
+  function onSecond() {
+    if (!running) return;
+    elapsed++;
+    updateUI();
+    if (elapsed >= GAME_SECS && !endingTriggered) {
+      // Survived! Show victory ending
+      endingTriggered = true;
+      triggerVictoryEnding();
+    }
+  }
+
+  // ── Victory: survived the full 60 seconds ────────────
+  function triggerVictoryEnding() {
+    running = false;
+    clearTimeout(spawnTid);
+    cancelAnimationFrame(rafId);
+    // Confetti burst
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        const fx = document.createElement('div');
+        fx.textContent = ['🎉','⭐','✨','🎊','🌟'][Math.floor(Math.random()*5)];
+        fx.style.cssText = `
+          position:absolute;
+          left:${10+Math.random()*80}%;
+          top:${10+Math.random()*60}%;
+          font-size:${1.2+Math.random()}rem;
+          pointer-events:none; z-index:16;
+          animation:csFX 1s ease-out forwards;
+        `;
+        stage.appendChild(fx);
+        setTimeout(() => fx.remove(), 1000);
+      }, i * 80);
+    }
+    setTimeout(() => {
+      fallers.forEach(f => f.el.remove());
+      fallers = [];
+      charsCont.innerHTML = '';
+      ovTitle.textContent = '🎉 You Survived!';
+      ovScore.textContent = '⭐ ' + score + ' pts';
+      ovScore.style.display = 'block';
+      ovMsg.textContent = score >= 200
+        ? 'WOW! Clover saved the show! The audience loved it! 🏆🌟'
+        : score >= 120 ? 'Amazing job, Clover! You\'re a natural! 🎩✨'
+        : score >= 60  ? 'Great work! The pencil was sneaky but you did it! ✏️🎉'
+        : 'You made it to the end! Next time you\'ll get even more! 🐝💪';
+      startBtn.textContent = '🎩 Play Again!';
+      overlay.style.display = 'flex';
+    }, 1600);
+  }
+
+  // ── Chaos ending ─────────────────────────────────────
+  function triggerChaosEnding() {
+    endingTriggered = true;
+    running = false;
+    clearTimeout(spawnTid);
+    cancelAnimationFrame(rafId);
+    fallers.forEach(f => {
+      if (!f.done) {
+        f.el.style.transition = 'transform 1.3s cubic-bezier(.2,1.6,.5,1), opacity 1.3s';
+        const dx = (Math.random() - 0.5) * 420;
+        const dy = -110 - Math.random() * 210;
+        f.el.style.transform = `translateX(calc(-50% + ${dx}px)) translateY(${dy}px) rotate(${(Math.random()-.5)*720}deg) scale(2.2)`;
+        f.el.style.opacity = '0';
+      }
+    });
+    stage.style.animation = 'csShake .12s linear 12';
+    flashEl.style.transition = 'opacity .07s';
+    flashEl.style.opacity = '0.75';
+    setTimeout(() => { flashEl.style.opacity = '0'; }, 600);
+    chaosText.style.display = 'block';
+    chaosText.style.animation = 'csChaosText .4s ease-out';
+    setTimeout(() => {
+      stage.style.animation = '';
+      chaosText.style.display = 'none';
+      fallers.forEach(f => { if (!f.done) f.el.remove(); });
+      fallers = [];
+      charsCont.innerHTML = '';
+      ovTitle.textContent = '🎪 Total Chaos!';
+      ovScore.textContent = '⭐ ' + score + ' pts';
+      ovScore.style.display = 'block';
+      ovMsg.textContent = score >= 150
+        ? 'So close, Clover! You almost made it! Try one more time! 🏅'
+        : score >= 70 ? 'Good try! The singer snuck past you. Try again! 🎤'
+        : 'The pencil said SQUEAK and won this round. You\'ve got this! ✏️💪';
+      startBtn.textContent = '🎩 Try Again!';
+      overlay.style.display = 'flex';
+    }, 1900);
+  }
+
+  // ── FX popup ─────────────────────────────────────────
+  function popFX(refEl, text, color) {
+    const sr = stage.getBoundingClientRect();
+    const er = refEl.getBoundingClientRect();
+    const fx = document.createElement('div');
+    fx.textContent = text;
+    fx.style.cssText = `
+      position:absolute;
+      left:${er.left - sr.left + er.width/2}px;
+      top:${er.top  - sr.top  + er.height/2}px;
+      transform:translate(-50%,-50%); pointer-events:none; z-index:22;
+      font-family:Quicksand,sans-serif; font-size:1rem; font-weight:700;
+      color:${color}; text-shadow:0 1px 6px rgba(0,0,0,.8);
+      animation:csFX .65s ease-out forwards; white-space:nowrap;
+    `;
+    stage.appendChild(fx);
+    setTimeout(() => fx.remove(), 660);
+  }
+
+  // ── Start ────────────────────────────────────────────
+  function start() {
+    score = 0; chaos = 0; elapsed = 0; nextId = 0; endingTriggered = false;
+    lastTs = null;
+    fallers.forEach(f => f.el.remove());
+    fallers = [];
+    charsCont.innerHTML = '';
+    updateUI();
+    ovScore.style.display = 'none';
+    chaosText.style.display = 'none';
+    stage.style.animation = '';
+    flashEl.style.opacity = '0';
+    overlay.style.display = 'none';
+    positionFloor();
+    running = true;
+    clearTimeout(spawnTid);
+    clearInterval(tickTid);
+    tickTid = setInterval(onSecond, 1000);
+    spawnTid = setTimeout(spawnWave, 400);
+    rafId = requestAnimationFrame(tick);
+  }
+
+  return { start };
+})();
+</script>
+</body>
+</html>
