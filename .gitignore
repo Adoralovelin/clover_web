@@ -9,3 +9,10 @@ desktop.ini
 
 # Node (if ever added)
 node_modules/
+
+# Leftover empty folder if locked during reorganize
+website/
+
+# Local env
+.env
+.env.*

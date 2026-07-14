@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Magic Show Comic | Clover's Art Studio</title>
+<title>AI Programs | Clover's Art Studio</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -50,19 +50,7 @@ tailwind.config = {
 }
 </script>
 <style>
-  .scene-connector {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 0;
-    color: #864d61;
-    opacity: 0.45;
-    font-size: 1.25rem;
-  }
-  .scene-connector span { line-height: 1; }
-
-  /* Chaos on Stage animations */
+/* Chaos on Stage animations */
   @keyframes csBounce {
     from { transform: translateY(0px); }
     to   { transform: translateY(-6px); }
@@ -99,126 +87,98 @@ tailwind.config = {
     60%  { transform:translate(-50%,-50%) scale(0.95) rotate(-2deg); }
     100% { opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
   }
+
 </style>
 </head>
-<body class="font-body-md text-on-background pb-20 md:pb-0" data-page="gallery">
+<body class="font-body-md text-on-background pb-20 md:pb-0" data-page="ai-programs">
 <div class="page-content">
-
-<header data-nav class="w-full rounded-b-xl shadow-xl shadow-[0_10px_20px_-5px_rgba(134,77,97,0.2)] bg-surface border-b-4 border-white sticky top-0 z-[100] py-4">
+<header data-nav class="w-full rounded-b-xl shadow-xl bg-surface border-b-4 border-white sticky top-0 z-[100] py-4">
 <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop w-full max-w-7xl mx-auto">
   <a href="index.html" data-page class="font-headline-md text-headline-md text-primary italic hover:scale-105 transition-transform">Clover's Art Studio</a>
-  <nav class="hidden md:flex items-center gap-8">
-    <a href="gallery.html" data-page data-nav-link="gallery" class="nav-link font-label-md text-label-md hover:scale-105 transition-all">My Gallery</a>
-    <a href="diy.html" data-page data-nav-link="diy" class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary hover:scale-105 transition-all">DIY Crafts</a>
-    <a href="about.html" data-page data-nav-link="about" class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary hover:scale-105 transition-all">About Me</a>
+  <nav class="hidden md:flex items-center gap-6">
+    <a href="crafts.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">Crafts</a>
+    <a href="drawings.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">Drawing</a>
+    <a href="ai-programs.html" data-page class="nav-link font-label-md text-label-md">AI Programs</a>
+    <a href="coming-soon.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">Coming Soon</a>
+    <a href="about.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">About</a>
   </nav>
-  <div class="flex items-center gap-4">
-    <a href="about.html" data-page class="hidden sm:flex items-center gap-2 px-6 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md shadow-lg hover:scale-105 transition-transform">
-      <span class="material-symbols-outlined">palette</span> Hire Me!
-    </a>
-  </div>
 </div>
 </header>
-
 <main class="max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop py-12">
+  <a href="index.html" data-page class="inline-flex items-center gap-2 text-primary font-label-md text-label-md mb-8 hover:gap-3 transition-all">
+    <span class="material-symbols-outlined">arrow_back</span> Back to Dashboard
+  </a>
+  <section class="text-center mb-12" data-animate>
+    <span class="inline-block bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-label-md text-label-md mb-4">Category 3</span>
+    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">AI Programs</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant">All of Clover's mini-games in one place — Tape Challenge, Squeaky Pencil, Chaos on Stage, and Cactus Parkour!</p>
+    <div class="flex flex-wrap justify-center gap-3 mt-6">
+      <a href="#tape-challenge" class="px-4 py-2 rounded-full bg-tertiary-container text-on-tertiary-container font-label-md text-label-md">🎀 Tape</a>
+      <a href="#sq-game" class="px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md">✏️ Pencil</a>
+      <a href="#cs-game" class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md">🎪 Chaos</a>
+      <a href="parkour.html" data-page class="px-4 py-2 rounded-full bg-surface-container-high text-primary font-label-md text-label-md">🌵 Parkour</a>
+    </div>
+  </section>
 
-  <!-- Back link -->
-  <a href="gallery.html" data-page class="inline-flex items-center gap-2 text-primary font-label-md text-label-md mb-10 hover:gap-3 transition-all group">
-    <span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
-    Back to Gallery
+  <!-- Cactus Parkour featured card -->
+  <a href="parkour.html" data-page class="group block mb-12 bg-[#1a1c2c] rounded-3xl overflow-hidden border-4 border-[#ffd56a] shadow-xl hover:scale-[1.01] transition-transform" style="font-family:'Press Start 2P',monospace;" data-animate>
+    <div class="grid grid-cols-1 sm:grid-cols-2">
+      <div class="aspect-[4/3] sm:aspect-auto bg-[#5c94fc] flex items-center justify-center p-6">
+        <img class="h-40 w-auto object-contain" style="image-rendering:pixelated;" alt="Cactus parkour sprite" src="images/cactus-sprite.png"/>
+      </div>
+      <div class="p-6 flex flex-col justify-center gap-3 text-[#f8f0d8]">
+        <span class="text-[#9bdaa5] text-[10px] leading-relaxed">GAME 4 · PIXEL PARKOUR</span>
+        <h2 class="text-[#ffd56a] text-sm sm:text-base leading-relaxed">🌵 CACTUS PARKOUR</h2>
+        <p class="text-[9px] leading-relaxed opacity-90">Super-Mario-style run &amp; jump with Clover's cactus! Pixel UI • flowers • pits • flag finish.</p>
+        <span class="inline-flex items-center gap-2 text-[#e85d4c] text-[10px] mt-2 group-hover:gap-3 transition-all">PRESS START →</span>
+      </div>
+    </div>
   </a>
 
-  <!-- Title -->
-  <div class="text-center mb-14" data-animate>
-    <div class="inline-block bg-secondary-container text-on-secondary-container px-5 py-2 rounded-full font-label-md text-label-md sticker-border tilt-left mb-4">🎪 A Magic Show Story</div>
-    <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">The Magic Show Comic</h1>
-    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">Six scenes of chaos, magic, and a very opinionated fox. Scroll to read from start to finish!</p>
-  </div>
-
-  <!-- Scenes -->
-  <div class="flex flex-col gap-0">
-
-    <!-- Scene 1 -->
-    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-primary" data-animate>
-      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-primary/10">
-        <span class="bg-primary text-on-primary px-4 py-1 rounded-full font-label-md text-label-md">Scene 1</span>
-        <span class="font-headline-sm text-headline-sm text-primary">This Is My Moment!</span>
+  <!-- TAPE CHALLENGE -->
+  <section class="mb-12" data-animate id="tape-challenge">
+    <div class="bg-white rounded-3xl shadow-xl overflow-hidden" style="border-left:8px solid #2f6a3f;">
+      <div class="flex flex-wrap items-center gap-3 px-6 pt-6 pb-4" style="border-bottom:2px solid rgba(47,106,63,0.15);background:rgba(155,218,165,0.22);">
+        <span class="bg-tertiary text-on-tertiary px-4 py-1 rounded-full font-label-md text-label-md">Game 1</span>
+        <span class="font-headline-sm text-headline-sm text-tertiary">Tape Challenge</span>
       </div>
-      <img class="w-full h-auto block" alt="Scene 1: Singer steps on stage for her big moment" src="images/comic-scene-1.png"/>
-      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">♫ THIS IS MY MOMENT— ♫ …then SKREEEEEECH!</p>
-    </div>
-
-    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
-
-    <!-- Scene 2 -->
-    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-secondary" data-animate>
-      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-secondary/10">
-        <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-label-md text-label-md">Scene 2</span>
-        <span class="font-headline-sm text-headline-sm text-secondary">POOF!</span>
+      <div class="px-6 pt-4 pb-2">
+        <p class="font-body-md text-body-md text-on-surface-variant">Click a tape strip, then click the matching dashed spot. Fill them all before time runs out!</p>
       </div>
-      <img class="w-full h-auto block" alt="Scene 2: The magician makes the singer's solo disappear with a POOF!" src="images/comic-scene-2.png"/>
-      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">"BEHOLD! I SHALL MAKE SOMETHING DISAPPEAR!" — "You just made my solo disappear." — "Technically… magic."</p>
-    </div>
-
-    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
-
-    <!-- Scene 3 -->
-    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-tertiary" data-animate>
-      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-tertiary/10">
-        <span class="bg-tertiary text-on-tertiary px-4 py-1 rounded-full font-label-md text-label-md">Scene 3</span>
-        <span class="font-headline-sm text-headline-sm text-tertiary">The Fox Trick</span>
+      <div class="flex flex-wrap items-center justify-center gap-4 px-6 py-3">
+        <div class="bg-surface-container px-4 py-2 rounded-full font-label-md text-label-md">⏱ <span id="tc-timer">0:40</span></div>
+        <div class="bg-surface-container px-4 py-2 rounded-full font-label-md text-label-md">🎀 <span id="tc-placed">0</span> / <span id="tc-total">8</span></div>
+        <div class="bg-surface-container px-4 py-2 rounded-full font-label-md text-label-md">⭐ <span id="tc-score">0</span></div>
       </div>
-      <img class="w-full h-auto block" alt="Scene 3: The magician pulls a fox out of his hat instead of a rabbit" src="images/comic-scene-3.png"/>
-      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">"PREPARE YOURSELVES FOR A CLASSIC RABBIT TRICK!" — "This is not the forest. And you are not a tree." — "Please pretend to be a rabbit." — "I charge extra."</p>
-    </div>
-
-    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
-
-    <!-- Scene 4 -->
-    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-primary-container" data-animate>
-      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-primary/10">
-        <span class="bg-primary-container text-on-primary-container px-4 py-1 rounded-full font-label-md text-label-md">Scene 4</span>
-        <span class="font-headline-sm text-headline-sm text-primary">Talent Show Chaos!</span>
+      <div class="px-4 pb-4 mx-auto" style="max-width:520px;">
+        <div id="tc-board" class="relative rounded-2xl overflow-hidden select-none" style="height:360px;background:linear-gradient(180deg,#fff8f0 0%,#ffe8d6 55%,#f5d5b8 100%);border:3px dashed rgba(47,106,63,0.25);">
+          <svg class="absolute inset-0 m-auto pointer-events-none" width="220" height="220" viewBox="0 0 100 100" style="top:50%;left:50%;transform:translate(-50%,-54%);opacity:0.35;">
+            <polygon points="50,8 61,38 94,38 67,58 78,90 50,70 22,90 33,58 6,38 39,38" fill="#ffb7ce" stroke="#864d61" stroke-width="2"/>
+          </svg>
+          <div class="absolute left-1/2 pointer-events-none" style="top:12%;transform:translateX(-50%);font-family:Quicksand,sans-serif;font-size:12px;font-weight:700;color:rgba(134,77,97,0.45);">★ PAPER STAR CRAFT ★</div>
+          <div id="tc-slots" style="position:absolute;inset:0;"></div>
+          <div id="tc-overlay" style="position:absolute;inset:0;z-index:20;background:rgba(255,248,240,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;">
+            <div style="font-size:2.5rem;">🎀</div>
+            <div id="tc-ov-title" style="font-family:Quicksand,sans-serif;font-size:1.5rem;font-weight:700;color:#2f6a3f;text-align:center;">Tape Challenge!</div>
+            <div id="tc-ov-msg" style="font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;color:#514347;text-align:center;max-width:280px;line-height:1.5;">Pick a tape color, then stick it on the matching dashed spot.</div>
+            <div id="tc-ov-score" style="display:none;font-family:Quicksand,sans-serif;font-size:2rem;font-weight:700;color:#864d61;"></div>
+            <button id="tc-start-btn" onclick="TCgame.start()" style="background:#2f6a3f;color:#fff;border:none;padding:12px 32px;border-radius:999px;font-family:Quicksand,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;">🎀 Start Sticking!</button>
+          </div>
+        </div>
       </div>
-      <img class="w-full h-auto block" alt="Scene 4: The talent show erupts in chaos with a shocked audience" src="images/comic-scene-4.png"/>
-      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">"Excuse me, I was hitting a HIGH NOTE." — "I thought a car alarm joined the show." — "No problem! I will fix this with MORE MAGIC!"</p>
-    </div>
-
-    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
-
-    <!-- Scene 5 -->
-    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-secondary-container" data-animate>
-      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-secondary/10">
-        <span class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-md text-label-md">Scene 5</span>
-        <span class="font-headline-sm text-headline-sm text-secondary">The Squeaky Pencil</span>
+      <div class="px-6 pb-6">
+        <p class="font-label-md text-label-md text-on-surface-variant text-center mb-3 opacity-70">Tape tray</p>
+        <div id="tc-tray" class="flex flex-wrap justify-center gap-3"></div>
       </div>
-      <img class="w-full h-auto block" alt="Scene 5: The magician pulls a squeaky animated pencil from his hat" src="images/comic-scene-5.png"/>
-      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">"This time, definitely a rabbit." — SQUEAK — "Is it alive?" — "No." — "That's what it wants us to think." — SQUEEEEEAK!</p>
     </div>
-
-    <div class="scene-connector" aria-hidden="true"><span>↓</span><span>↓</span></div>
-
-    <!-- Scene 6 -->
-    <div class="bg-white rounded-3xl shadow-xl sticker-border overflow-hidden border-l-8 border-tertiary-container relative" data-animate>
-      <div class="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-tertiary/10">
-        <span class="bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full font-label-md text-label-md">Scene 6</span>
-        <span class="font-headline-sm text-headline-sm text-tertiary">Buzz on Stage!</span>
-        <span class="ml-auto bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full font-label-md text-label-md text-xs tilt-right">THE END 🌟</span>
-      </div>
-      <img class="w-full h-auto block" alt="Scene 6: A bee flies onto the stage and discovers music" src="images/comic-scene-6.png"/>
-      <p class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">BZZZZZZZZZZ — "It's a bee!" — "A flying lemon with anger issues!" — SQUEAK — "It has discovered music." 🐝🎵</p>
-    </div>
-
-  </div>
-
+  </section>
+<!-- 🎮  THE SQUEAKY PENCIL MINI-GAME          -->
   <!-- ══════════════════════════════════════════ -->
-  <!-- 🎮  THE SQUEAKY PENCIL MINI-GAME          -->
-  <!-- ══════════════════════════════════════════ -->
-  <div class="mt-16" data-animate>
+  <div class="mt-12" data-animate id="sq-game">
     <!-- Header -->
     <div class="bg-white rounded-3xl shadow-xl overflow-hidden" style="border-left: 8px solid #685f25;">
       <div class="flex flex-wrap items-center gap-3 px-6 pt-6 pb-4" style="border-bottom: 2px solid rgba(104,95,37,0.15); background: rgba(238,225,153,0.25);">
-        <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-label-md text-label-md">Mini Game</span>
+        <span class="bg-secondary text-on-secondary px-4 py-1 rounded-full font-label-md text-label-md">Game 2</span>
         <span class="font-headline-sm text-headline-sm text-secondary">The Squeaky Pencil ✏️</span>
         <span class="font-body-md text-body-md text-on-surface-variant ml-auto hidden sm:inline">Trace the shape — if you can!</span>
       </div>
@@ -268,12 +228,12 @@ tailwind.config = {
   <!-- ══════════════════════════════════════════ -->
   <!-- 🎪  CHAOS ON STAGE MINI-GAME              -->
   <!-- ══════════════════════════════════════════ -->
-  <div class="mt-12" data-animate>
+  <div class="mt-12" data-animate id="cs-game">
     <div class="bg-white rounded-3xl shadow-xl overflow-hidden" style="border-left:8px solid #864d61;">
 
       <!-- Header -->
       <div class="flex flex-wrap items-center gap-3 px-6 pt-6 pb-4" style="border-bottom:2px solid rgba(134,77,97,0.15);background:rgba(255,185,206,0.18);">
-        <span class="bg-primary text-on-primary px-4 py-1 rounded-full font-label-md text-label-md">Mini Game 2</span>
+        <span class="bg-primary text-on-primary px-4 py-1 rounded-full font-label-md text-label-md">Game 3</span>
         <span class="font-headline-sm text-headline-sm text-primary">Chaos on Stage 🎪</span>
         <span class="px-3 py-1 rounded-full font-label-md text-label-md ml-1" style="background:#ffd9e3;color:#864d61;">🌸 Clover Mode</span>
       </div>
@@ -356,38 +316,136 @@ tailwind.config = {
       </div><!-- /stage wrapper -->
     </div>
   </div><!-- end chaos game -->
-
-  <!-- Back to Gallery -->
-  <div class="mt-16 text-center" data-animate="scale">
-    <p class="font-body-md text-body-md text-on-surface-variant mb-6">Want to see the real crafts behind the comic?</p>
-    <a href="gallery.html" data-page class="inline-flex items-center gap-3 bg-primary text-on-primary px-10 py-4 rounded-full font-headline-sm text-headline-sm sticker-border hover:scale-105 active:scale-95 transition-all">
-      <span class="material-symbols-outlined">gallery_thumbnail</span>
-      Back to the Gallery
+  <div class="mt-12 text-center" data-animate>
+    <a href="comic.html" data-page class="inline-flex items-center gap-2 text-primary font-label-md text-label-md">
+      <span class="material-symbols-outlined">auto_stories</span> Read the Magic Show Comic
     </a>
   </div>
-
 </main>
-
-<footer class="w-full mt-16 rounded-t-full bg-secondary-container border-t-8 border-white/30 shadow-[0_-10px_30px_rgba(104,95,37,0.15)]">
-<div class="flex flex-col items-center gap-4 py-12 px-margin-mobile md:px-margin-desktop w-full max-w-4xl mx-auto">
+<footer class="w-full mt-16 rounded-t-full bg-secondary-container border-t-8 border-white/30">
+<div class="flex flex-col items-center gap-4 py-12">
   <span class="font-headline-sm text-headline-sm text-on-secondary-container">Clover's Art Studio</span>
-  <div class="flex gap-8">
-    <a href="about.html" data-page class="font-label-md text-label-md text-on-secondary-container underline font-bold transition-colors hover:text-primary">Let's create together!</a>
-    <a href="#" class="font-label-md text-label-md text-on-secondary-container opacity-80 hover:opacity-100 transition-colors hover:text-primary">Privacy Policy</a>
-  </div>
-  <p class="font-label-md text-label-md text-on-secondary-container opacity-60 mt-4">2024 Handmade with Magic &amp; Crayons</p>
+  <p class="font-label-md text-label-md text-on-secondary-container opacity-60">2024 Handmade with Magic &amp; Crayons</p>
 </div>
 </footer>
 </div>
-
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-[0_-5px_20px_rgba(0,0,0,0.05)] flex justify-around items-center py-3 z-[200] rounded-t-2xl border-t-2 border-primary-container/20">
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface flex justify-around items-center py-3 z-[200] rounded-t-2xl border-t-2 border-primary-container/20">
   <a href="index.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">home</span><span class="font-label-md text-[10px]">Home</span></a>
-  <a href="gallery.html" data-page class="flex flex-col items-center gap-1 text-primary"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gallery_thumbnail</span><span class="font-label-md text-[10px]">Gallery</span></a>
-  <a href="diy.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">auto_fix</span><span class="font-label-md text-[10px]">DIY</span></a>
+  <a href="crafts.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">handyman</span><span class="font-label-md text-[10px]">Crafts</span></a>
+  <a href="ai-programs.html" data-page class="flex flex-col items-center gap-1 text-primary"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">sports_esports</span><span class="font-label-md text-[10px]">Games</span></a>
   <a href="about.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">person</span><span class="font-label-md text-[10px]">About</span></a>
 </nav>
-
 <script src="js/main.js"></script>
+
+<script>
+const TCgame = (() => {
+  const SECONDS = 40;
+  const COLORS = [
+    { id: 'pink', hex: '#ffb7ce', label: 'Pink' },
+    { id: 'yellow', hex: '#eee199', label: 'Yellow' },
+    { id: 'green', hex: '#9bdaa5', label: 'Green' },
+    { id: 'lilac', hex: '#c4b5fd', label: 'Lilac' },
+  ];
+  const SLOT_LAYOUT = [
+    { x: 18, y: 22, color: 'pink', rot: -18 },
+    { x: 72, y: 20, color: 'yellow', rot: 14 },
+    { x: 12, y: 48, color: 'green', rot: -8 },
+    { x: 78, y: 46, color: 'lilac', rot: 12 },
+    { x: 22, y: 72, color: 'yellow', rot: -12 },
+    { x: 68, y: 74, color: 'pink', rot: 16 },
+    { x: 45, y: 16, color: 'lilac', rot: 4 },
+    { x: 48, y: 78, color: 'green', rot: -4 },
+  ];
+  const board = document.getElementById('tc-board');
+  const slotsEl = document.getElementById('tc-slots');
+  const trayEl = document.getElementById('tc-tray');
+  const overlay = document.getElementById('tc-overlay');
+  const ovTitle = document.getElementById('tc-ov-title');
+  const ovMsg = document.getElementById('tc-ov-msg');
+  const ovScore = document.getElementById('tc-ov-score');
+  const timerEl = document.getElementById('tc-timer');
+  const placedEl = document.getElementById('tc-placed');
+  const totalEl = document.getElementById('tc-total');
+  const scoreEl = document.getElementById('tc-score');
+  let running = false, selected = null, placed = 0, score = 0, left = SECONDS, tickId = null, slots = [];
+  totalEl.textContent = SLOT_LAYOUT.length;
+  function colorHex(id) { return COLORS.find(c => c.id === id)?.hex || '#ccc'; }
+  function buildTray() {
+    trayEl.innerHTML = '';
+    COLORS.forEach(c => {
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.dataset.color = c.id; btn.className = 'tc-tape';
+      btn.style.cssText = `width:88px;height:36px;border-radius:6px;border:3px solid rgba(0,0,0,.12);background:${c.hex};cursor:pointer;font-family:Quicksand,sans-serif;font-size:11px;font-weight:700;color:#1d1832;box-shadow:2px 3px 0 rgba(0,0,0,.08);transform:rotate(${(Math.random()-.5)*6}deg);`;
+      btn.textContent = c.label + ' tape';
+      btn.addEventListener('click', () => selectTape(c.id, btn));
+      trayEl.appendChild(btn);
+    });
+  }
+  function selectTape(colorId, btn) {
+    if (!running) return;
+    selected = colorId;
+    document.querySelectorAll('.tc-tape').forEach(b => { b.style.outline = 'none'; });
+    btn.style.outline = '3px solid #2f6a3f';
+  }
+  function buildSlots() {
+    slotsEl.innerHTML = '';
+    slots = SLOT_LAYOUT.map((s, i) => {
+      const el = document.createElement('button');
+      el.type = 'button';
+      el.style.cssText = `position:absolute;left:${s.x}%;top:${s.y}%;width:72px;height:28px;transform:translate(-50%,-50%) rotate(${s.rot}deg);border-radius:5px;border:2.5px dashed ${colorHex(s.color)};background:rgba(255,255,255,.35);cursor:pointer;z-index:5;`;
+      el.addEventListener('click', () => tryPlace(i));
+      slotsEl.appendChild(el);
+      return { color: s.color, filled: false, el };
+    });
+  }
+  function tryPlace(idx) {
+    if (!running) return;
+    const slot = slots[idx];
+    if (slot.filled) return;
+    if (!selected) { popTip(slot.el, 'Pick a tape first!', '#864d61'); return; }
+    if (selected !== slot.color) { popTip(slot.el, 'Wrong color!', '#ba1a1a'); return; }
+    slot.filled = true; placed++; score += 10 + Math.max(0, left);
+    slot.el.style.background = colorHex(slot.color);
+    slot.el.style.border = '2px solid rgba(0,0,0,.15)';
+    slot.el.textContent = '🎀'; slot.el.style.fontSize = '14px'; slot.el.style.cursor = 'default';
+    popTip(slot.el, 'Stuck!', '#2f6a3f'); updateHUD();
+    if (placed >= slots.length) endGame(true);
+  }
+  function popTip(ref, text, color) {
+    const br = board.getBoundingClientRect(), er = ref.getBoundingClientRect();
+    const tip = document.createElement('div'); tip.textContent = text;
+    tip.style.cssText = `position:absolute;left:${er.left-br.left+er.width/2}px;top:${er.top-br.top-8}px;transform:translate(-50%,-100%);pointer-events:none;z-index:30;font-family:Quicksand,sans-serif;font-size:12px;font-weight:700;color:${color};background:rgba(255,255,255,.92);padding:3px 8px;border-radius:999px;`;
+    board.appendChild(tip); setTimeout(() => tip.remove(), 800);
+  }
+  function updateHUD() {
+    placedEl.textContent = placed; scoreEl.textContent = score;
+    const s = left % 60; timerEl.textContent = '0:' + (s < 10 ? '0' + s : s);
+    timerEl.style.color = left <= 10 ? '#ba1a1a' : '#1d1832';
+  }
+  function onTick() { if (!running) return; left--; updateHUD(); if (left <= 0) endGame(false); }
+  function endGame(won) {
+    running = false; clearInterval(tickId); selected = null;
+    ovScore.style.display = 'block'; ovScore.textContent = '⭐ ' + score + ' pts';
+    ovTitle.textContent = won ? 'Craft Complete!' : "Time's Up!";
+    ovMsg.textContent = won ? 'You stuck every piece!' : 'You got ' + placed + ' pieces — try again!';
+    document.getElementById('tc-start-btn').textContent = 'Play Again!';
+    overlay.style.display = 'flex';
+  }
+  function start() {
+    running = true; selected = null; placed = 0; score = 0; left = SECONDS;
+    clearInterval(tickId); overlay.style.display = 'none'; ovScore.style.display = 'none';
+    buildSlots(); buildTray(); updateHUD(); tickId = setInterval(onTick, 1000);
+  }
+  if (!document.getElementById('tc-style')) {
+    const st = document.createElement('style'); st.id = 'tc-style';
+    st.textContent = '@keyframes tcFade{0%{opacity:1}100%{opacity:0}}';
+    document.head.appendChild(st);
+  }
+  buildTray(); buildSlots(); updateHUD();
+  return { start };
+})();
+</script>
+
 <script>
 /* ══════════════════════════════════════════════════════
    THE SQUEAKY PENCIL MINI-GAME

@@ -1,6 +1,12 @@
 {
-  "rewrites": [
-    { "source": "/",           "destination": "/website/index.html" },
-    { "source": "/:path*",     "destination": "/website/:path*" }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/website", "destination": "/", "permanent": true },
+    { "source": "/website/:path*", "destination": "/:path*", "permanent": true },
+    { "source": "/diy", "destination": "/crafts", "permanent": false },
+    { "source": "/diy.html", "destination": "/crafts.html", "permanent": false },
+    { "source": "/gallery", "destination": "/drawings", "permanent": false },
+    { "source": "/gallery.html", "destination": "/drawings.html", "permanent": false }
   ]
 }

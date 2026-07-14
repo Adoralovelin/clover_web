@@ -3,8 +3,14 @@
 
     const PAGES = {
         home: 'index.html',
-        gallery: 'gallery.html',
-        diy: 'diy.html',
+        crafts: 'crafts.html',
+        drawings: 'drawings.html',
+        'ai-programs': 'ai-programs.html',
+        'coming-soon': 'coming-soon.html',
+        comic: 'comic.html',
+        parkour: 'parkour.html',
+        gallery: 'drawings.html',
+        diy: 'crafts.html',
         about: 'about.html'
     };
 
@@ -150,8 +156,10 @@
         const buttons = document.querySelectorAll('[data-filter]');
         const items = document.querySelectorAll('[data-category]');
         const comicSection = document.querySelector('[data-comic-storyline]');
-        const craftsSection = document.querySelector('[data-crafts-section]');
-        if (!buttons.length || !items.length) return;
+        const craftingSection = document.querySelector('[data-crafting-section]');
+        const drawingsSection = document.querySelector('[data-drawings-section]');
+        const comingSoonSection = document.querySelector('[data-coming-soon-section]');
+        if (!buttons.length) return;
 
         const applyFilter = (filter) => {
             buttons.forEach(b => {
@@ -163,20 +171,24 @@
             activeBtn?.classList.remove('opacity-70');
 
             if (comicSection) {
-                const showComics = filter === 'all' || filter === 'comics';
-                comicSection.style.display = showComics ? '' : 'none';
+                comicSection.style.display = filter === 'all' ? '' : 'none';
             }
-            if (craftsSection) {
-                const showCraftsSection = filter === 'all' || filter === 'crafts' || filter === 'characters';
-                craftsSection.style.display = showCraftsSection ? '' : 'none';
+            if (craftingSection) {
+                craftingSection.style.display = filter === 'all' || filter === 'crafting' ? '' : 'none';
+            }
+            if (drawingsSection) {
+                drawingsSection.style.display = filter === 'all' || filter === 'drawings' ? '' : 'none';
+            }
+            if (comingSoonSection) {
+                comingSoonSection.style.display = filter === 'all' || filter === 'coming-soon' ? '' : 'none';
             }
 
             items.forEach(item => {
                 const category = item.dataset.category;
                 let show = filter === 'all';
-                if (filter === 'comics') show = category === 'comics';
-                if (filter === 'crafts') show = category === 'crafts';
-                if (filter === 'characters') show = category === 'characters';
+                if (filter === 'crafting') show = category === 'crafting';
+                if (filter === 'drawings') show = category === 'drawings';
+                if (filter === 'coming-soon') show = category === 'coming-soon';
 
                 item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                 if (show) {

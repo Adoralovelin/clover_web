@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>Cactus Parkour | Clover's Art Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%; background: #1a1c2c; color: #f8f0d8;
+  font-family: "Press Start 2P", monospace;
+  overflow: hidden; image-rendering: pixelated;
+}
+.wrap {
+  max-width: 900px; margin: 0 auto; height: 100%;
+  display: flex; flex-direction: column; padding: 8px; gap: 6px;
+}
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 6px;
+}
+.topbar a {
+  color: #ffd56a; text-decoration: none; font-size: 8px;
+  border: 3px solid #ffd56a; padding: 6px 10px; background: #2a2040;
+}
+.topbar a:hover { background: #3d2f5c; }
+.title { font-size: 10px; color: #9bdaa5; }
+.hud {
+  display: flex; gap: 12px; flex-wrap: wrap; font-size: 9px;
+  background: #2a2040; border: 3px solid #ffd56a; padding: 8px 12px;
+}
+.hud b { color: #ffd56a; }
+.stage {
+  position: relative; flex: 1; min-height: 200px;
+  border: 4px solid #ffd56a;
+  box-shadow: 0 0 0 4px #2a2040, 8px 8px 0 #000;
+  overflow: hidden; background: #5c94fc;
+}
+canvas {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  image-rendering: pixelated; image-rendering: crisp-edges;
+}
+.overlay {
+  position: absolute; inset: 0; background: rgba(26,28,44,0.92);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 14px; z-index: 10; padding: 20px; text-align: center;
+}
+.overlay.hidden { display: none; }
+.overlay h1 { font-size: clamp(12px,3vw,20px); color: #ffd56a; }
+.overlay p { font-size: clamp(8px,1.8vw,11px); color: #f8f0d8; line-height: 2.2; }
+.btn {
+  font-family: "Press Start 2P", monospace; font-size: 10px;
+  padding: 12px 24px; background: #e85d4c; color: #fff;
+  border: none; border-bottom: 4px solid #8b2020; cursor: pointer;
+}
+.btn:hover { background: #c04040; }
+.btn:active { border-bottom-width: 1px; transform: translateY(3px); }
+.pads {
+  position: absolute; bottom: 10px; left: 0; right: 0;
+  display: flex; justify-content: space-between; padding: 0 14px;
+  pointer-events: none; z-index: 5;
+}
+.dpad { display: flex; gap: 6px; }
+.pad-btn {
+  width: 54px; height: 54px; background: rgba(255,255,255,0.18);
+  border: 3px solid rgba(255,255,255,0.35); color: #fff;
+  font-size: 20px; display: flex; align-items: center; justify-content: center;
+  pointer-events: auto; user-select: none; -webkit-user-select: none;
+  border-radius: 4px; touch-action: none;
+}
+@media (min-width: 600px) { .pads { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="ai-programs.html">&#8592; GAMES</a>
+    <span class="title">&#127797; CACTUS PARKOUR</span>
+    <a href="index.html">HOME</a>
+  </div>
+  <div class="hud">
+    <span>SCORE <b id="hScore">00000</b></span>
+    <span>&#127864; <b id="hFlowers">0</b></span>
+    <span>&#10084; <b id="hLives">3</b></span>
+  </div>
+  <div class="stage" id="stage">
+    <canvas id="game"></canvas>
+    <div class="overlay" id="overlay">
+      <h1 id="ovTitle">CACTUS PARKOUR</h1>
+      <p id="ovMsg">Arrow keys / WASD to run<br/>Space / W / &#8593; to jump<br/>Collect flowers &amp; reach the flag!</p>
+      <button class="btn" id="startBtn">PRESS START</button>
+    </div>
+    <div class="pads">
+      <div class="dpad">
+        <div class="pad-btn" id="padL">&#9664;</div>
+        <div class="pad-btn" id="padR">&#9654;</div>
+      </div>
+      <div class="pad-btn" id="padJ">&#9650;</div>
+    </div>
+  </div>
+</div>
+<script>
+'use strict';
+
+// ── Canvas setup ──────────────────────────────────────────────────────────────
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+
+// Fixed internal resolution
+const CW = 800, CH = 448; // 800 x 28*16
+
+function resizeCanvas() {
+  const s = document.getElementById('stage');
+  const scale = Math.min(s.clientWidth / CW, s.clientHeight / CH);
+  canvas.width = CW;
+  canvas.height = CH;
+  canvas.style.width  = Math.floor(CW * scale) + 'px';
+  canvas.style.height = Math.floor(CH * scale) + 'px';
+  ctx.imageSmoothingEnabled = false;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// ── Constants ─────────────────────────────────────────────────────────────────
+const T   = 16;          // tile size (world px)
+const LW  = 120;         // level width in tiles
+const LH  = 28;          // level height in tiles  (28*16 = 448 = CH)
+const PW  = 18, PH = 28; // player collision box
+const SPW = 48, SPH = 60;// sprite draw size
+const GRAV     = 0.52;
+const SPD      = 2.8;
+const JUMP_VY  = -9.5;
+const MAX_FALL = 12;
+const COLS = 4, ROWS = 2;
+
+// Sprite frame size (updated once image loads)
+let FW = 294, FH = 324;
+
+// ── Level ─────────────────────────────────────────────────────────────────────
+// Build as 2-D array [row][col]
+const lv = Array.from({length: LH}, () => Array(LW).fill(' '));
+
+function st(r,c,ch){ if(r>=0&&r<LH&&c>=0&&c<LW) lv[r][c]=ch; }
+function gt(r,c){
+  if(c<0||c>=LW) return '#';
+  if(r<0)        return ' ';
+  if(r>=LH)      return '#';
+  return lv[r][c];
+}
+
+// Ground rows 26-27
+for(let x=0;x<LW;x++){ st(26,x,'#'); st(27,x,'#'); }
+
+// Pits (gaps in ground)
+[[12,16],[28,33],[46,51],[62,67],[80,85],[99,104],[112,116]].forEach(([a,b])=>{
+  for(let x=a;x<b;x++){ st(26,x,' '); st(27,x,' '); }
+});
+
+// Platforms [row, col, width]
+[
+  [23, 7,5],[23,20,5],[23,35,5],[23,52,5],[23,68,5],[23,84,4],[23,106,5],
+  [19, 3,4],[19,17,5],[19,33,4],[19,50,5],[19,66,4],[19,82,5],[19,100,4],
+  [15,10,4],[15,29,5],[15,53,4],[15,75,5],[15, 98,4],
+].forEach(([r,c,w])=>{ for(let i=0;i<w;i++) st(r,c+i,'='); });
+
+// Flowers
+[
+  [25,3],[25,11],[25,24],[25,40],[25,56],[25,72],[25,89],[25,107],
+  [22,8],[22,22],[22,37],[22,54],[22,70],[22,86],
+  [18,4],[18,19],[18,34],[18,52],[18,68],[18,83],
+  [14,11],[14,30],[14,55],[14,77],
+].forEach(([r,c])=>st(r,c,'o'));
+
+// Flag
+st(26,117,'F');
+
+// ── Tile helpers ──────────────────────────────────────────────────────────────
+function solid(col,row){ const ch=gt(row,col); return ch==='#'||ch==='='||ch==='F'; }
+
+function pCollides(px,py){
+  const c0=Math.floor(px/T),     c1=Math.floor((px+PW-1)/T);
+  const r0=Math.floor(py/T),     r1=Math.floor((py+PH-1)/T);
+  for(let r=r0;r<=r1;r++) for(let c=c0;c<=c1;c++) if(solid(c,r)) return true;
+  return false;
+}
+
+// ── Collectibles ──────────────────────────────────────────────────────────────
+let picks = [];
+function buildPicks(){
+  picks = [];
+  for(let r=0;r<LH;r++) for(let c=0;c<LW;c++)
+    if(lv[r][c]==='o') picks.push({wx:c*T+4, wy:r*T+4, got:false});
+}
+buildPicks();
+
+let goalX = 117*T;
+outer: for(let r=0;r<LH;r++) for(let c=0;c<LW;c++) if(lv[r][c]==='F'){goalX=c*T;break outer;}
+
+// ── Sprite ────────────────────────────────────────────────────────────────────
+const spr = new Image();
+spr.onload = ()=>{ FW=Math.round(spr.naturalWidth/COLS); FH=Math.round(spr.naturalHeight/ROWS); };
+spr.src = 'images/cactus-sprite.png';
+
+// ── Game state ────────────────────────────────────────────────────────────────
+const keys = {L:false,R:false,J:false,JP:false};
+let running=false, won=false, animT=0, camX=0, particles=[];
+let score=0, flowers=0, lives=3;
+
+const P = { x:2*T, y:26*T-PH, vx:0, vy:0, onGnd:false, face:1, state:'idle', inv:0 };
+
+const scoreEl   = document.getElementById('hScore');
+const flowersEl = document.getElementById('hFlowers');
+const livesEl   = document.getElementById('hLives');
+function hud(){ scoreEl.textContent=String(score).padStart(5,'0'); flowersEl.textContent=flowers; livesEl.textContent=lives; }
+
+// ── Animation frame ───────────────────────────────────────────────────────────
+function fi(){
+  switch(P.state){
+    case 'run':  return Math.floor(animT/7)%4; // top row frames 0-3
+    case 'jump': return 6;
+    case 'fall': return 6;
+    case 'duck': return 5;
+    default:     return 4; // idle bottom-left
+  }
+}
+
+// ── Reset ─────────────────────────────────────────────────────────────────────
+function reset(full){
+  P.x=2*T; P.y=26*T-PH; P.vx=0; P.vy=0; P.onGnd=false; P.state='idle'; P.inv=0;
+  camX=0;
+  if(full){ score=0; flowers=0; lives=3; won=false; buildPicks(); hud(); }
+}
+
+// ── Update ────────────────────────────────────────────────────────────────────
+function update(){
+  if(!running||won) return;
+  animT++;
+  if(P.inv>0) P.inv--;
+
+  // Horizontal
+  P.vx = 0;
+  if(keys.L){ P.vx=-SPD; P.face=-1; }
+  if(keys.R){ P.vx= SPD; P.face= 1; }
+
+  // Jump
+  if(keys.JP && P.onGnd){ P.vy=JUMP_VY; P.onGnd=false; }
+  keys.JP = false;
+
+  // Gravity
+  P.vy = Math.min(P.vy+GRAV, MAX_FALL);
+
+  // ── X movement + resolve ──
+  P.x += P.vx;
+  if(pCollides(P.x, P.y)){
+    // Snap to tile boundary
+    if(P.vx > 0) P.x = Math.floor((P.x+PW)/T)*T - PW - 0.1;
+    else         P.x = (Math.floor(P.x/T)+1)*T + 0.1;
+    P.vx = 0;
+  }
+
+  // ── Y movement + resolve ──
+  P.y += P.vy;
+  P.onGnd = false;
+  if(pCollides(P.x, P.y)){
+    if(P.vy >= 0){
+      // Landing: snap feet to top of tile
+      P.y   = Math.floor((P.y+PH)/T)*T - PH;
+      P.onGnd = true;
+    } else {
+      // Ceiling: snap head to bottom of tile above
+      P.y = (Math.floor(P.y/T)+1)*T;
+    }
+    P.vy = 0;
+  }
+
+  // State
+  if(!P.onGnd)              P.state = P.vy<0 ? 'jump' : 'fall';
+  else if(Math.abs(P.vx)>0.05) P.state = 'run';
+  else                      P.state = 'idle';
+
+  // Collect flowers
+  picks.forEach(f=>{
+    if(f.got) return;
+    if(P.x<f.wx+8&&P.x+PW>f.wx&&P.y<f.wy+8&&P.y+PH>f.wy){
+      f.got=true; flowers++; score+=100; hud();
+      burst(f.wx+4, f.wy+4, '#e85d4c');
+    }
+  });
+
+  // Particles
+  particles = particles.filter(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=0.15; return --p.life>0; });
+
+  // Fell off map
+  if(P.y > LH*T+40){
+    lives--; hud();
+    if(lives<=0){ endGame(false); return; }
+    P.x = Math.max(2*T, Math.floor(camX/T)*T + 2*T);
+    P.y = 3*T; P.vx=0; P.vy=0;
+  }
+
+  // Win
+  if(P.x+PW>=goalX && P.x<=goalX+T){ score+=500; hud(); won=true; endGame(true); }
+
+  // Camera (smoothly follow, slightly ahead)
+  const target = P.x - CW*0.28;
+  camX += (target-camX)*0.12;
+  camX = Math.max(0, Math.min(camX, LW*T - CW));
+}
+
+function burst(wx,wy,col){
+  for(let i=0;i<9;i++) particles.push({
+    x:wx, y:wy, col,
+    vx:(Math.random()-0.5)*4, vy:-Math.random()*4-1,
+    life:25+Math.random()*10|0
+  });
+}
+
+// ── Draw ──────────────────────────────────────────────────────────────────────
+function drawBg(){
+  // Sky gradient
+  const g=ctx.createLinearGradient(0,0,0,CH);
+  g.addColorStop(0,'#5c94fc'); g.addColorStop(1,'#b8d8ff');
+  ctx.fillStyle=g; ctx.fillRect(0,0,CW,CH);
+
+  // Pixel clouds (parallax 0.25)
+  ctx.fillStyle='rgba(255,255,255,0.92)';
+  [[50,28,52,16],[200,18,44,14],[360,34,56,18],[530,22,48,14],
+   [710,36,50,16],[870,20,40,12],[1060,30,54,16],[1250,16,46,14],
+   [1440,32,50,18],[1620,22,42,14],[1800,28,56,16]
+  ].forEach(([wx,wy,cw,ch])=>{
+    const sx = Math.round(wx - camX*0.25);
+    ctx.fillRect(sx,wy,cw,ch);
+    ctx.fillRect(sx+Math.round(cw*0.15), wy-Math.round(ch*0.5), Math.round(cw*0.6), Math.round(ch*0.6));
+  });
+
+  // Distant hills (parallax 0.12)
+  ctx.fillStyle='#4aa028';
+  for(let i=0;i<16;i++){
+    const totalW = CW+200;
+    const hx = ((i*145 - Math.round(camX*0.12))%totalW + totalW)%totalW - 100;
+    const hr = 44+((i*37)%3)*18;
+    ctx.beginPath(); ctx.moveTo(hx,CH-36); ctx.lineTo(hx+hr,CH-36-hr*0.7); ctx.lineTo(hx+hr*2,CH-36); ctx.fill();
+  }
+}
+
+function drawTiles(){
+  const c0=Math.max(0,Math.floor(camX/T)-1);
+  const c1=Math.min(LW-1,Math.ceil((camX+CW)/T)+1);
+  for(let r=0;r<LH;r++){
+    for(let c=c0;c<=c1;c++){
+      const ch=lv[r][c];
+      if(ch===' '||ch==='o') continue;
+      drawTile(ch,c,r,Math.round(c*T-camX),r*T);
+    }
+  }
+}
+
+function drawTile(ch,col,row,sx,sy){
+  // Dirt body
+  ctx.fillStyle='#8b5a2b'; ctx.fillRect(sx,sy,T,T);
+  // Brick lines
+  ctx.fillStyle='#6b3a18';
+  ctx.fillRect(sx,sy+8,T,2);
+  const off=(row%2===0)?0:8;
+  ctx.fillRect(sx+off,sy,2,8); ctx.fillRect(sx+(off+8)%T,sy,2,8);
+  // Grass on top edge
+  if(!solid(col,row-1)){
+    ctx.fillStyle='#5da32b'; ctx.fillRect(sx,sy,T,4);
+    ctx.fillStyle='#7ac93e'; ctx.fillRect(sx+1,sy,T-2,2);
+  }
+  // Flag pole
+  if(ch==='F'){
+    ctx.fillStyle='#f0e8c0'; ctx.fillRect(sx+7,sy-52,2,52);
+    ctx.fillStyle='#e85d4c'; ctx.fillRect(sx+9,sy-50,16,12);
+    ctx.fillStyle='#c03020'; ctx.fillRect(sx+9,sy-38,16,2);
+    ctx.fillStyle='#ffd56a'; ctx.fillRect(sx+7,sy-54,2,3);
+  }
+}
+
+function drawFlowers(){
+  picks.forEach(f=>{
+    if(f.got) return;
+    const sx=Math.round(f.wx-camX), sy=f.wy;
+    if(sx<-12||sx>CW+12) return;
+    ctx.fillStyle='#3d8f25'; ctx.fillRect(sx+3,sy+5,2,5);
+    ctx.fillStyle='#e85d4c';
+    ctx.fillRect(sx+1,sy+1,3,3); ctx.fillRect(sx+6,sy+1,3,3);
+    ctx.fillRect(sx+1,sy+5,3,3); ctx.fillRect(sx+6,sy+5,3,3);
+    ctx.fillStyle='#ffd56a'; ctx.fillRect(sx+3,sy+3,4,4);
+  });
+}
+
+function drawParticles(){
+  particles.forEach(p=>{
+    ctx.globalAlpha = Math.min(1, p.life/20);
+    ctx.fillStyle=p.col;
+    ctx.fillRect(Math.round(p.x-camX), Math.round(p.y), 3, 3);
+  });
+  ctx.globalAlpha=1;
+}
+
+function drawPlayer(){
+  const sx = Math.round(P.x - camX);
+
+  // Drop shadow when airborne
+  if(!P.onGnd){
+    ctx.fillStyle='rgba(0,0,0,0.18)';
+    const shadowY = Math.min(26*T, P.y+PH+8);
+    ctx.fillRect(sx+3, shadowY, PW-6, 3);
+  }
+
+  if(spr.complete && spr.naturalWidth > 0){
+    const frame  = fi();
+    const fc = frame%COLS, fr = Math.floor(frame/COLS);
+    const srcX = fc*FW, srcY = fr*FH;
+
+    // Center sprite on collision box; align feet
+    const dx = Math.round(sx - (SPW-PW)/2);
+    const dy = Math.round(P.y + PH - SPH);
+
+    ctx.save();
+    if(P.face < 0){
+      // Flip horizontally
+      ctx.translate(dx+SPW, dy);
+      ctx.scale(-1,1);
+      ctx.drawImage(spr, srcX, srcY, FW, FH, 0, 0, SPW, SPH);
+    } else {
+      ctx.drawImage(spr, srcX, srcY, FW, FH, dx, dy, SPW, SPH);
+    }
+    ctx.restore();
+  } else {
+    // Fallback block cactus
+    ctx.fillStyle='#6bcb3d'; ctx.fillRect(sx,P.y,PW,PH);
+    ctx.fillStyle='#3d9a4a'; ctx.fillRect(sx+3,P.y+3,PW-6,PH-10);
+    ctx.fillStyle='#222';
+    ctx.fillRect(sx+4,P.y+5,3,3); ctx.fillRect(sx+11,P.y+5,3,3);
+  }
+}
+
+function draw(){
+  ctx.clearRect(0,0,CW,CH);
+  drawBg();
+  drawTiles();
+  drawFlowers();
+  drawParticles();
+  drawPlayer();
+}
+
+// ── Game over ─────────────────────────────────────────────────────────────────
+function endGame(win){
+  running=false;
+  const ov=document.getElementById('overlay');
+  ov.classList.remove('hidden');
+  document.getElementById('ovTitle').textContent = win?'YOU WIN!':'GAME OVER';
+  document.getElementById('ovMsg').innerHTML = win
+    ? `SCORE ${String(score).padStart(5,'0')}<br/>FLOWERS ${flowers}<br/><br/>The cactus made it!`
+    : `SCORE ${String(score).padStart(5,'0')}<br/>All lives lost...<br/>Try again!`;
+  document.getElementById('startBtn').textContent='PLAY AGAIN';
+}
+
+function startGame(){
+  document.getElementById('overlay').classList.add('hidden');
+  reset(true); running=true; won=false;
+}
+
+// ── Loop ──────────────────────────────────────────────────────────────────────
+(function loop(){
+  update(); draw();
+  requestAnimationFrame(loop);
+})();
+
+// ── Keyboard ──────────────────────────────────────────────────────────────────
+window.addEventListener('keydown',e=>{
+  if(['ArrowLeft','a','A'].includes(e.key)){ keys.L=true; e.preventDefault(); }
+  if(['ArrowRight','d','D'].includes(e.key)){ keys.R=true; e.preventDefault(); }
+  if(['ArrowUp','w','W',' '].includes(e.key)){
+    if(!keys.J) keys.JP=true; keys.J=true; e.preventDefault();
+  }
+  if(!running&&(e.key==='Enter'||e.key===' ')) startGame();
+});
+window.addEventListener('keyup',e=>{
+  if(['ArrowLeft','a','A'].includes(e.key)) keys.L=false;
+  if(['ArrowRight','d','D'].includes(e.key)) keys.R=false;
+  if(['ArrowUp','w','W',' '].includes(e.key)) keys.J=false;
+});
+
+// ── Touch pads ────────────────────────────────────────────────────────────────
+function hold(id, dn, up){
+  const el=document.getElementById(id);
+  el.addEventListener('touchstart',e=>{e.preventDefault();dn();},{passive:false});
+  el.addEventListener('touchend',  e=>{e.preventDefault();up();},{passive:false});
+  el.addEventListener('mousedown', dn);
+  el.addEventListener('mouseup',   up);
+}
+hold('padL', ()=>{ keys.L=true; },  ()=>{ keys.L=false; });
+hold('padR', ()=>{ keys.R=true; },  ()=>{ keys.R=false; });
+hold('padJ', ()=>{ if(!keys.J)keys.JP=true; keys.J=true; }, ()=>{ keys.J=false; });
+</script>
+</body>
+</html>

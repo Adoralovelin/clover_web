@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clover's Art Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="css/shared.css" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "on-tertiary-container": "#266137", "on-primary": "#ffffff", "surface-container-high": "#ede4ff",
+        "on-surface-variant": "#514347", "on-background": "#1d1832", "surface-tint": "#864d61",
+        "inverse-surface": "#322c48", "on-secondary-container": "#6d6329", "surface-bright": "#fdf7ff",
+        "error-container": "#ffdad6", "surface-container-highest": "#e7deff", "surface-container-lowest": "#ffffff",
+        "on-secondary": "#ffffff", "on-tertiary-fixed-variant": "#145129", "secondary-fixed-dim": "#d4c782",
+        "outline-variant": "#d5c2c6", "inverse-primary": "#fab3ca", "tertiary-fixed-dim": "#96d5a0",
+        "primary-fixed-dim": "#fab3ca", "on-tertiary": "#ffffff", "on-primary-container": "#7b4458",
+        "on-primary-fixed-variant": "#6a364a", "surface": "#fdf7ff", "surface-container": "#f2ebff",
+        "outline": "#837377", "secondary": "#685f25", "secondary-container": "#eee199", "tertiary": "#2f6a3f",
+        "on-surface": "#1d1832", "secondary-fixed": "#f1e39c", "surface-container-low": "#f8f1ff",
+        "background": "#fdf7ff", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#50470f",
+        "surface-variant": "#e7deff", "primary-container": "#ffb7ce", "on-tertiary-fixed": "#00210b",
+        "tertiary-fixed": "#b2f2bb", "on-secondary-fixed": "#201c00", "on-error": "#ffffff",
+        "on-primary-fixed": "#360b1e", "tertiary-container": "#9bdaa5", "surface-dim": "#dfd5f9",
+        "inverse-on-surface": "#f5eeff", "error": "#ba1a1a", "primary-fixed": "#ffd9e3", "primary": "#864d61"
+      },
+      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+      spacing: { "margin-mobile": "20px", "card-gap": "32px", "margin-desktop": "64px", gutter: "24px", "base-unit": "8px" },
+      fontFamily: {
+        "headline-sm": ["Quicksand"], "label-md": ["Quicksand"], "body-lg": ["Be Vietnam Pro"],
+        "headline-md": ["Quicksand"], "headline-lg-mobile": ["Quicksand"], "headline-lg": ["Quicksand"], "body-md": ["Be Vietnam Pro"]
+      },
+      fontSize: {
+        "headline-sm": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+        "label-md": ["14px", { lineHeight: "1.0", letterSpacing: "0.05em", fontWeight: "700" }],
+        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+        "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "600" }],
+        "headline-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+        "headline-lg": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }]
+      }
+    }
+  }
+}
+</script>
+<style>
+.scribble-underline {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 Q 25 0 50 5 Q 75 10 100 5' stroke='%23ffb7ce' stroke-width='4' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: bottom;
+  padding-bottom: 4px;
+}
+</style>
+</head>
+<body class="font-body-md text-on-background overflow-x-hidden pb-20 md:pb-0" data-page="home">
+<div class="page-content">
+
+<nav data-nav class="sticky top-0 z-50 w-full rounded-b-xl shadow-xl shadow-[0_10px_20px_-5px_rgba(134,77,97,0.2)] bg-surface border-b-4 border-white py-4">
+<div class="flex justify-between items-center px-5 md:px-margin-desktop w-full max-w-7xl mx-auto">
+  <a href="index.html" data-page class="font-headline-md text-headline-md text-primary italic hover:scale-105 transition-transform">Clover's Art Studio</a>
+  <div class="hidden md:flex items-center gap-6">
+    <a href="#about" class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">About</a>
+    <a href="crafts.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">Crafts</a>
+    <a href="drawings.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">Drawing</a>
+    <a href="ai-programs.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">AI Programs</a>
+    <a href="coming-soon.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">Coming Soon</a>
+  </div>
+  <a href="#explore" class="hidden sm:inline-flex bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md hover:scale-105 shadow-lg">Explore</a>
+</div>
+</nav>
+
+<main>
+
+  <!-- HERO (like Adora Lin intro) -->
+  <section class="relative min-h-[70vh] flex items-center px-5 md:px-margin-desktop py-16 overflow-hidden">
+    <div class="absolute -top-16 -left-10 w-48 h-48 bg-primary-container/25 rounded-full blur-3xl float-animation"></div>
+    <div class="absolute bottom-10 right-0 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl float-animation" style="animation-delay:1s"></div>
+    <div class="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div data-animate>
+        <div class="inline-block mb-5 bg-tertiary-container text-on-tertiary-container px-5 py-2 rounded-full font-label-md text-label-md sticker-border">🎨 Young Artist</div>
+        <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-6 leading-tight">
+          Creating colorful worlds where <span class="text-primary italic">every mess is magic.</span>
+        </h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-xl">
+          Hi! I'm Clover — an eight-year-old artist who loves crafts, drawings, comics, and silly little games. Welcome to my studio!
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#explore" class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 rounded-full font-headline-sm text-headline-sm sticker-border hover:scale-105 transition-all">
+            Explore My Art
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+          <a href="#about" class="inline-flex items-center gap-2 bg-white border-2 border-primary text-primary px-8 py-4 rounded-full font-headline-sm text-headline-sm hover:bg-primary-fixed transition-colors">
+            About Me
+          </a>
+        </div>
+      </div>
+      <div class="relative max-w-md mx-auto lg:ml-auto" data-animate="scale">
+        <div class="absolute inset-0 bg-primary-container rounded-3xl rotate-[-4deg]"></div>
+        <div class="relative bg-white p-3 rounded-3xl hand-drawn-border rotate-[2deg] overflow-hidden shadow-xl">
+          <img class="w-full aspect-square object-cover rounded-2xl" alt="Clover smiling" src="images/clover.png?v=2"/>
+        </div>
+        <div class="absolute -bottom-4 -left-4 bg-secondary-container text-on-secondary-container px-5 py-2 rounded-full sticker-border -rotate-6 font-label-md text-label-md shadow-md">
+          Age 8 · Artist at Work!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ME (first main section, like Adora's About the Author) -->
+  <section id="about" class="px-5 md:px-margin-desktop py-20 bg-surface-container-low">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center" data-animate>
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="bg-white p-4 rounded-3xl sticker-border shadow-xl rotate-1 hover:rotate-0 transition-transform">
+            <img class="w-full h-auto rounded-2xl block" alt="Clover's cactus drawing" src="images/clovers-drawing.png"/>
+            <p class="mt-3 text-center font-headline-sm text-headline-sm text-secondary">Happy Cactus Family 🌵</p>
+            <p class="text-center font-label-md text-label-md text-on-surface-variant opacity-70">One of my favorite drawings</p>
+          </div>
+        </div>
+        <div class="lg:col-span-7 order-1 lg:order-2 space-y-5">
+          <span class="inline-block bg-primary-container text-on-primary-container px-4 py-1 rounded-full font-label-md text-label-md">About Me</span>
+          <h2 class="font-headline-md text-headline-md text-primary">Hi! I'm <span class="scribble-underline">Clover</span></h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            Hi! My name is Clover, and I'm eight years old. I'm crafty, silly, and I love making lots and lots of stuff! I'm good at drawing, and I have so much fun creating cute animals, colorful crafts, and funny little projects. Sometimes I feel like a little Picasso with a lot of tape!
+          </p>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            When I'm not crafting, I'm usually drawing comics, inventing mini-games, or hunting for the perfect scrap of cardboard. Every piece of paper is a playground waiting for a splash of color!
+          </p>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <div class="bg-surface-container-high px-4 py-2 rounded-full border-2 border-dashed border-primary text-primary font-label-md text-label-md">Age: 8</div>
+            <div class="bg-tertiary-container px-4 py-2 rounded-full border-2 border-dashed border-on-tertiary-container text-on-tertiary-container font-label-md text-label-md">Professional Scribbler</div>
+            <div class="bg-secondary-container px-4 py-2 rounded-full border-2 border-dashed border-on-secondary-container text-on-secondary-container font-label-md text-label-md">Tape Enthusiast</div>
+          </div>
+          <a href="about.html" data-page class="inline-flex items-center gap-2 text-primary font-label-md text-label-md mt-2 hover:gap-3 transition-all">
+            More about me
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 CATEGORIES (explore section, like books grid) -->
+  <section id="explore" class="px-5 md:px-margin-desktop py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12" data-animate>
+        <span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-md text-label-md mb-4">Explore</span>
+        <h2 class="font-headline-md text-headline-md text-on-background mb-3">My Four Art Worlds</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">Pick a category to jump in — crafts, drawings, games, or what's coming next!</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" data-stagger>
+        <a href="crafts.html" data-page class="group block bg-white rounded-3xl sticker-border overflow-hidden border-t-8 border-tertiary shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all">
+          <div class="aspect-[16/10] overflow-hidden bg-tertiary-container/20">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Crafts" src="images/craft-magic-stage.jpg"/>
+          </div>
+          <div class="p-6 text-center">
+            <span class="inline-block bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-md text-label-md mb-2">1</span>
+            <h3 class="font-headline-md text-headline-md text-tertiary mb-1">Crafts</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-3">Puppets, stages &amp; tape magic</p>
+            <span class="text-tertiary font-label-md text-label-md inline-flex items-center gap-1 group-hover:gap-2 transition-all">Open <span class="material-symbols-outlined text-lg">arrow_forward</span></span>
+          </div>
+        </a>
+
+        <a href="drawings.html" data-page class="group block bg-white rounded-3xl sticker-border overflow-hidden border-t-8 border-secondary shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all">
+          <div class="aspect-[16/10] overflow-hidden bg-secondary-container/30 flex items-center justify-center p-4">
+            <img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" alt="Drawings" src="images/clovers-drawing.png"/>
+          </div>
+          <div class="p-6 text-center">
+            <span class="inline-block bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-label-md mb-2">2</span>
+            <h3 class="font-headline-md text-headline-md text-secondary mb-1">Drawing</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-3">Personal sketchbook art</p>
+            <span class="text-secondary font-label-md text-label-md inline-flex items-center gap-1 group-hover:gap-2 transition-all">Open <span class="material-symbols-outlined text-lg">arrow_forward</span></span>
+          </div>
+        </a>
+
+        <a href="ai-programs.html" data-page class="group block bg-white rounded-3xl sticker-border overflow-hidden border-t-8 border-primary shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all">
+          <div class="aspect-[16/10] bg-primary-container/30 flex items-center justify-center gap-4 text-4xl">
+            <span>🎀</span><span>✏️</span><span>🎪</span>
+          </div>
+          <div class="p-6 text-center">
+            <span class="inline-block bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-md text-label-md mb-2">3</span>
+            <h3 class="font-headline-md text-headline-md text-primary mb-1">AI Programs</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-3">All the mini-games live here!</p>
+            <span class="text-primary font-label-md text-label-md inline-flex items-center gap-1 group-hover:gap-2 transition-all">Play games <span class="material-symbols-outlined text-lg">arrow_forward</span></span>
+          </div>
+        </a>
+
+        <a href="coming-soon.html" data-page class="group block bg-white rounded-3xl sticker-border overflow-hidden border-t-8 border-primary/40 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all">
+          <div class="aspect-[16/10] bg-surface-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-6xl text-primary/35">hourglass_empty</span>
+          </div>
+          <div class="p-6 text-center">
+            <span class="inline-block bg-surface-container-high text-primary px-3 py-1 rounded-full font-label-md text-label-md mb-2">4</span>
+            <h3 class="font-headline-md text-headline-md text-primary mb-1">Coming Soon</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-3">New surprises on the way</p>
+            <span class="text-primary font-label-md text-label-md inline-flex items-center gap-1 group-hover:gap-2 transition-all">Peek <span class="material-symbols-outlined text-lg">arrow_forward</span></span>
+          </div>
+        </a>
+      </div>
+
+      <p class="text-center mt-12">
+        <a href="comic.html" data-page class="inline-flex items-center gap-2 text-primary font-label-md text-label-md hover:gap-3 transition-all">
+          <span class="material-symbols-outlined">auto_stories</span> Also: Read the Magic Show Comic
+        </a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="w-full rounded-t-[100px] md:rounded-t-full bg-secondary-container border-t-8 border-white/30">
+<div class="flex flex-col items-center gap-4 py-12 px-5 max-w-4xl mx-auto text-center">
+  <div class="font-headline-sm text-headline-sm text-on-secondary-container">Clover's Art Studio</div>
+  <p class="font-body-md text-body-md text-on-secondary-container opacity-80 max-w-md">Creating colorful crafts and silly stories — thanks for visiting!</p>
+  <div class="flex flex-wrap justify-center gap-6 mt-2">
+    <a href="#about" class="font-label-md text-label-md text-on-secondary-container hover:text-primary">About</a>
+    <a href="crafts.html" data-page class="font-label-md text-label-md text-on-secondary-container hover:text-primary">Crafts</a>
+    <a href="drawings.html" data-page class="font-label-md text-label-md text-on-secondary-container hover:text-primary">Drawing</a>
+    <a href="ai-programs.html" data-page class="font-label-md text-label-md text-on-secondary-container hover:text-primary">AI Programs</a>
+  </div>
+  <p class="font-body-md text-body-md text-on-secondary-container opacity-60 mt-4">2024 Handmade with Magic &amp; Crayons</p>
+</div>
+</footer>
+</div>
+
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-[0_-5px_20px_rgba(0,0,0,0.1)] flex justify-around items-center py-3 z-[200] rounded-t-2xl border-t-2 border-primary-container/20">
+  <a href="index.html" data-page class="flex flex-col items-center gap-1 text-primary"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">home</span><span class="font-label-md text-[10px]">Home</span></a>
+  <a href="#about" class="flex flex-col items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined">person</span><span class="font-label-md text-[10px]">About</span></a>
+  <a href="crafts.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined">handyman</span><span class="font-label-md text-[10px]">Crafts</span></a>
+  <a href="ai-programs.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined">sports_esports</span><span class="font-label-md text-[10px]">Games</span></a>
+</nav>
+
+<script src="js/main.js"></script>
+</body>
+</html>

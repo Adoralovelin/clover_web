@@ -82,9 +82,11 @@ tailwind.config = {
 <div class="flex justify-between items-center px-5 md:px-margin-desktop w-full max-w-7xl mx-auto">
 <a href="index.html" data-page class="font-headline-md text-headline-md text-primary italic hover:scale-105 transition-transform">Clover's Art Studio</a>
 <nav class="hidden md:flex gap-8 items-center">
-<a href="gallery.html" data-page data-nav-link="gallery" class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary hover:scale-105 transition-transform">My Gallery</a>
-<a href="diy.html" data-page data-nav-link="diy" class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary hover:scale-105 transition-transform">DIY Crafts</a>
-<a href="about.html" data-page data-nav-link="about" class="nav-link font-label-md text-label-md hover:scale-105 transition-transform">About Me</a>
+    <a href="crafts.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">Crafts</a>
+    <a href="drawings.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">Drawing</a>
+    <a href="ai-programs.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">AI Programs</a>
+    <a href="coming-soon.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">Coming Soon</a>
+    <a href="about.html" data-page class="nav-link text-on-surface-variant font-label-md text-label-md hover:text-primary">About</a>
 </nav>
 <div class="flex items-center gap-4">
 <a href="about.html" data-page class="hidden sm:inline-flex bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md hover:scale-105 transition-transform">Hire Me!</a>
@@ -105,7 +107,7 @@ tailwind.config = {
 <div class="absolute inset-0 bg-primary-container rounded-3xl rotate-[-3deg] group-hover:rotate-[-5deg] transition-transform duration-300"></div>
 <div class="relative bg-white p-4 rounded-3xl hand-drawn-border rotate-[2deg] group-hover:rotate-0 transition-transform duration-300 overflow-hidden">
 <div class="paper-texture absolute inset-0 z-10 pointer-events-none"></div>
-<img class="w-full aspect-square object-cover rounded-2xl" alt="Clover smiling in a white dress" src="images/clover.png"/>
+<img class="relative z-0 w-full aspect-square object-cover object-center rounded-2xl" alt="Clover smiling in a white dress" src="images/clover.png?v=2"/>
 </div>
 <div class="absolute -bottom-6 -right-6 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full sticker-border rotate-12 font-headline-sm text-headline-sm">Artist at Work! 🎨</div>
 </div>
@@ -174,10 +176,10 @@ tailwind.config = {
 </div>
 
 <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-[0_-5px_20px_rgba(0,0,0,0.05)] flex justify-around items-center py-3 z-[200] rounded-t-2xl border-t-2 border-primary-container/20">
-<a href="index.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">home</span><span class="font-label-md text-[10px]">Home</span></a>
-<a href="gallery.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">gallery_thumbnail</span><span class="font-label-md text-[10px]">Gallery</span></a>
-<a href="diy.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">auto_fix</span><span class="font-label-md text-[10px]">DIY</span></a>
-<a href="about.html" data-page class="flex flex-col items-center gap-1 text-primary"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span><span class="font-label-md text-[10px]">About</span></a>
+  <a href="index.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">home</span><span class="font-label-md text-[10px]">Home</span></a>
+  <a href="crafts.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">handyman</span><span class="font-label-md text-[10px]">Crafts</span></a>
+  <a href="ai-programs.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">sports_esports</span><span class="font-label-md text-[10px]">Games</span></a>
+  <a href="about.html" data-page class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60"><span class="material-symbols-outlined">person</span><span class="font-label-md text-[10px]">About</span></a>
 </nav>
 
 <script src="js/main.js"></script>
